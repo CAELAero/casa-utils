@@ -1,0 +1,63 @@
+{
+  "name": "@cael-aero/casa-utils",
+  "description": "Utilities for interacting with CASA Data",
+  "version": "0.1.0",
+  "license": "BSD-3-Clause",
+  "readme": "README.md",
+  "author": "Justin Couch",
+  "homepage": "https://github.com/CAELAero/casa-utils",
+  "bugs": {
+    "url": "https://github.com/CAELAero/casa-utils/issues"
+  },
+  "keywords": [
+    "CASA",
+    "airworthiness",
+    "typescript"
+  ],
+  "main": "build/lib/index.js",
+  "types": "build/lib/index.d.ts",
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.10.0"
+  },
+  "files": [
+    "build/lib/**/*",
+    "LICENSE.md",
+    "tsconfig.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CAELAero/casa-utils"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "test": "jest --config jest.config.json",
+    "coverage": "jest --coverage  && cat ./coverage/lcov.info | coveralls",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "docs": "typedoc --out docs src",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "dependencies": {
+    "xlsx": "^0.15.5"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.1.0",
+    "@types/node": "^13.7.1",
+    "coveralls": "^3.0.9",
+    "jest": "^25.1.0",
+    "prettier": "^1.19.1",
+    "ts-jest": "^25.2.0",
+    "tslint": "^6.0.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typedoc": "^0.16.9",
+    "typescript": "^3.7.2"
+  }
+}
