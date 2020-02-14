@@ -6,15 +6,12 @@
   },
   "collectCoverage": true,
   "collectCoverageFrom": [
-    "src/**/*.ts"
+    "src/**/{!(*-type),}.ts"
   ],
   "moduleFileExtensions": ["js", "ts", "json", "node"],
   "preset": "ts-jest",
   "testEnvironment": "node",
   "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.(ts)$",
-  "testPathIgnorePatterns": [
-    "/node_modules/"
-  ],
   "transform": {
     "^.+\\.js?$": "babel-jest",
     "^.+\\.(ts|tsx)?$": "ts-jest"
