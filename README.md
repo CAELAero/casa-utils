@@ -35,5 +35,10 @@ bower install @cael-aero/casa-utils --save
 TBD
 
 ## License
+
 This source code is licensed under the BSD-style license found in the
 LICENSE file in the root directory of this source tree. 
+
+## Related Projects
+
+[GFA Utils](https://github.com/CAELAero/gfa-utils) for Gliding Federation of Australia Data
