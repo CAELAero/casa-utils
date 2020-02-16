@@ -67,5 +67,27 @@ describe("Loads correct data", () => {
         expect(entry.propellerManufacturer).toBe("HARTZELL PROPELLERS");
         expect(entry.propellerModel).toBe("HC-C2YR-4CF/FC8477A-4");
         expect(entry.typeCertificateNumber).toBeFalsy();
+
+        expect(entry.registeredHolder).toBeDefined();
+        expect(entry.registeredHolder.name).toBe("GOTTS, Caleb Norton");
+        expect(entry.registeredHolder.address).toBeDefined();
+        expect(entry.registeredHolder.address.line1).toBe("PO Box 855");
+        expect(entry.registeredHolder.address.line2).toBeFalsy();
+        expect(entry.registeredHolder.address.suburb).toBe("KARAMA");
+        expect(entry.registeredHolder.address.state).toBe("NT");
+        expect(entry.registeredHolder.address.postcode).toBe("0813");
+        expect(entry.registeredHolder.address.country).toBe("Australia");
+        expect(entry.registeredHolder.commencementDate).toEqual(new SimpleDate(15, 6, 2012));
+
+        expect(entry.registeredOperator).toBeDefined();
+        expect(entry.registeredOperator.name).toBe("GOTTS, Caleb Norton");
+        expect(entry.registeredOperator.address).toBeDefined();
+        expect(entry.registeredOperator.address.line1).toBe("PO Box 855");
+        expect(entry.registeredOperator.address.line2).toBeFalsy();
+        expect(entry.registeredOperator.address.suburb).toBe("KARAMA");
+        expect(entry.registeredOperator.address.state).toBe("NT");
+        expect(entry.registeredOperator.address.postcode).toBe("0813");
+        expect(entry.registeredOperator.address.country).toBe("Australia");
+        expect(entry.registeredOperator.commencementDate).toEqual(new SimpleDate(15, 6, 2012));
     });
 });

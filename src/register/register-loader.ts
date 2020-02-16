@@ -9,6 +9,8 @@ import { ParsingOptions, readFile, WorkBook, utils, SSF } from 'xlsx';
 
 import { RegistrationData } from "./registration-data";
 import { RegistrationType } from "./registration-type";
+import { Address } from "./address";
+import { OwnerData } from "./owner-data";
 import { EngineData } from "./engine-data";
 import { EnumMapper } from "./enum-mapper";
 import { SimpleDate } from "./simple-date";
@@ -72,6 +74,17 @@ export class CASARegisterLoader {
             entry.propellerManufacturer = row[34];
             entry.propellerModel = row[35];
             entry.typeCertificateNumber = row[36];
+
+            let holder_add = Address.create2Line(row[13], row[14], row[15], row[16], row[17].toString().padStart(4, '0'), row[18]);
+            let holder_date = CASARegisterLoader.parseDate(row[19]);
+
+            entry.registeredHolder = OwnerData.create(row[12], holder_add, holder_date);
+
+            let operator_add = Address.create2Line(row[21], row[22], row[23], row[24], row[25].toString().padStart(4, '0'), row[26]);
+            let operator_date = CASARegisterLoader.parseDate(row[27]);
+
+            entry.registeredOperator = OwnerData.create(row[20], operator_add, operator_date);
+
 
             retval.push(entry);
         });
