@@ -13,5 +13,6 @@ export enum AirframeType {
     GLIDER_MOTOR = "Motor-Glider",
     ORNITHOPTER = "Ornithopter",
     POWER_AIRCRAFT = "Power Driven Aeroplane",
-    HELICOPTER = "Rotorcraft"
+    HELICOPTER = "Rotorcraft",
+    UNKNOWN = "Unknown"
 }

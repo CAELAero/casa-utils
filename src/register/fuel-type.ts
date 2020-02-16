@@ -11,4 +11,5 @@ export enum FuelType {
     LIQUID_GAS = "Liquid Gas",
     DIESEL = "Diesel",
     NOT_APPLICABLE = "Not Applicable",
+    UNKNOWN = "Unknown"
 }

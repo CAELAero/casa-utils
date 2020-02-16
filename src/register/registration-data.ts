@@ -12,6 +12,7 @@ import { RegistrationType } from "./registration-type";
 import { LandingGearType } from "./landing-gear-type";
 import { AirframeType } from "./airframe-type";
 import { CertificationCategoryType } from "./certification-category-type";
+
 import { SimpleDate } from "./simple-date";
 
 export class RegistrationData {
@@ -25,12 +26,17 @@ export class RegistrationData {
     serialNumber: string;
 
     /** Maximum take off weight, in kg */
-    mtow: string;
+    mtow: number;
 
     /** if aircraft has an engine, details here, otherwise undefined */
+    engineCount: number;
     engine?: EngineData;
 
     registrationType: RegistrationType;
+    registrationExpiryDate: SimpleDate;
+    registrationSuspended: boolean;
+
+    firstRegisteredDate: SimpleDate;
 
     registeredOperator: OwnerData;
     registeredHolder: OwnerData;
@@ -43,6 +49,4 @@ export class RegistrationData {
     propellerManufacturer: string;
     propellerModel: string;
     typeCertificateNumber: string;
-    registrationExpiryDate: SimpleDate;
-    registrationSuspended: boolean;
 }

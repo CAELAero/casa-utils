@@ -29,5 +29,6 @@ export enum CertificationCategoryType {
     SPECIAL_AIRSHIP = "Special Class - Airship",
     SPECIAL_OTHER = "Special Class of Aircraft",
     TRANSPORT = "Transport",
-    UTILITY = "Utility"
+    UTILITY = "Utility",
+    UNKNOWN = "Unknown"
 }

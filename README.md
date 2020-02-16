@@ -1,7 +1,7 @@
 
-# CAEL Aero casa Utils
+# CAEL Aero CASA Utils
 
-> Utilities for interacting with Gliding Federation of Australia files and systems. 
+> Utilities for interacting with [CASA](https://www.casa.gov.au/) files and systems. 
 
 ![npm type definitions](https://img.shields.io/npm/types/@cael-aero/casa-utils)
 ![node](https://img.shields.io/node/v/@cael-aero/casa-utils)

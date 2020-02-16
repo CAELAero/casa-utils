@@ -13,5 +13,6 @@ export enum LandingGearType {
     TAILWHEEL_FIXED = "Tailwheel - Fixed",
     TAILWHEEL_RETRACTABLE = "Tailwheel - Retractable",
     TRICYCLE_FIXED = "Tricycle - Fixed",
-    TRICYCLE_RETRACTABLE = "Tricycle - Retractable"
+    TRICYCLE_RETRACTABLE = "Tricycle - Retractable",
+    UNKNOWN = "Unknown"
 }

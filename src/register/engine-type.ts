@@ -12,5 +12,6 @@ export enum EngineType {
     TURBOFAN = "Turbofan",
     TURBOJET = "Turbojet",
     TURBOPROP = "Turboprop",
-    TURBOSHAFT = "Turboshaft"
+    TURBOSHAFT = "Turboshaft",
+    UNKNOWN = "Unknown"
 }

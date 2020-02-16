@@ -8,5 +8,6 @@
 export enum RegistrationType {
     CAR_1988 = "CAR 1988 Registration",
     FULL = "Full Registration",
-    INTERIM = "Interim Registration"
+    INTERIM = "Interim Registration",
+    UNKNOWN = "Unknown"
 }
