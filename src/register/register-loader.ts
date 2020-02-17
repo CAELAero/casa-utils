@@ -72,8 +72,14 @@ export class CASARegisterLoader {
             entry.landingGear = enum_mapper.lookupLandingGear(row[29]);
             entry.airframeType = enum_mapper.lookupAirframe(row[30]);
 
-            entry.propellerManufacturer = row[34];
-            entry.propellerModel = row[35];
+            if(row[34] !== "AIRCRAFT NOT FITTED WITH PROPELLER") {
+                entry.propellerManufacturer = row[34];
+            }
+
+            if(row[35] !== "NOT APPLICABLE") {
+                entry.propellerModel = row[35];
+            }
+
             entry.typeCertificateNumber = row[36];
 
             let holder_add = Address.create2Line(row[13], row[14], row[15], row[16], row[17].toString().padStart(4, '0'), row[18]);

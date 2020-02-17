@@ -97,4 +97,62 @@ describe("Loads correct data", () => {
 
         expect(entry.specialCoA).toBeFalsy();
     });
+
+    it("Handles a single non-powered glider", () => {
+        let result:RegistrationData[] = CASARegisterLoader.listAllRegistrations("tests/register/data/single_row_glider_registration.csv");
+
+        expect(result).toBeTruthy();
+        expect(result.length).toBe(1);
+
+        let entry = result[0];
+
+        expect(entry.mark).toBe("VH-GLP");
+        expect(entry.manufacturer).toBe("ROLLADEN-SCHNEIDER FLUGZEUGBAU GMBH");
+        expect(entry.manufacturerCountry).toBe("Germany");
+        expect(entry.manufactureYear).toBe(1997);
+        expect(entry.type).toBeFalsy();
+        expect(entry.model).toBe("LS6-C");
+        expect(entry.serialNumber).toBe("6246");
+        expect(entry.mtow).toBe(525);
+
+        expect(entry.engineCount).toBe(0);
+        expect(entry.engine).toBeFalsy();
+
+        expect(entry.registrationType).toBe(RegistrationType.FULL);
+        expect(entry.registrationSuspended).toBeFalsy();
+        expect(entry.registrationExpiryDate).toBeFalsy();
+        expect(entry.firstRegisteredDate).toEqual(new SimpleDate(18, 12, 1997));
+
+        expect(entry.landingGear).toBe(LandingGearType.UNKNOWN);
+        expect(entry.airframeType).toBe(AirframeType.GLIDER);
+
+        expect(entry.propellerManufacturer).toBeFalsy();
+        expect(entry.propellerModel).toBeFalsy();
+        expect(entry.typeCertificateNumber).toBeFalsy();
+
+        expect(entry.registeredHolder).toBeDefined();
+        expect(entry.registeredHolder.name).toBe("COUCH, Justin Todd");
+        expect(entry.registeredHolder.address).toBeDefined();
+        expect(entry.registeredHolder.address.line1).toBe("14 Baldwin Way");
+        expect(entry.registeredHolder.address.line2).toBeFalsy();
+        expect(entry.registeredHolder.address.suburb).toBe("CURRANS HILL");
+        expect(entry.registeredHolder.address.state).toBe("NSW");
+        expect(entry.registeredHolder.address.postcode).toBe("2567");
+        expect(entry.registeredHolder.address.country).toBe("Australia");
+        expect(entry.registeredHolder.commencementDate).toEqual(new SimpleDate(20, 6, 2016));
+
+        expect(entry.registeredOperator).toBeDefined();
+        expect(entry.registeredOperator.name).toBe("COUCH, Justin Todd");
+        expect(entry.registeredOperator.address).toBeDefined();
+        expect(entry.registeredOperator.address.line1).toBe("14 Baldwin Way");
+        expect(entry.registeredOperator.address.line2).toBeFalsy();
+        expect(entry.registeredOperator.address.suburb).toBe("CURRANS HILL");
+        expect(entry.registeredOperator.address.state).toBe("NSW");
+        expect(entry.registeredOperator.address.postcode).toBe("2567");
+        expect(entry.registeredOperator.address.country).toBe("Australia");
+        expect(entry.registeredOperator.commencementDate).toEqual(new SimpleDate(20, 6, 2016));
+
+        expect(entry.standardCoA).toBeFalsy();
+        expect(entry.specialCoA).toBeFalsy();
+    });
 });
