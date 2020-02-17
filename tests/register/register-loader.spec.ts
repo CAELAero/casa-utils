@@ -218,4 +218,68 @@ describe("Loads correct data", () => {
         expect(entry.standardCoA).toBeFalsy();
         expect(entry.specialCoA).toBeFalsy();
     });
+
+    it("Handles a single helicopter", () => {
+        let result:RegistrationData[] = CASARegisterLoader.listAllRegistrations("tests/register/data/single_row_helicopter.csv");
+
+        expect(result).toBeTruthy();
+        expect(result.length).toBe(1);
+
+        let entry = result[0];
+
+        expect(entry.mark).toBe("VH-ZZY");
+        expect(entry.manufacturer).toBe("BELL HELICOPTER CO");
+        expect(entry.manufacturerCountry).toBe("United States of America");
+        expect(entry.manufactureYear).toBe(1972);
+        expect(entry.type).toBeFalsy();
+        expect(entry.model).toBe("206B (II)");
+        expect(entry.serialNumber).toBe("761");
+        expect(entry.mtow).toBe(1452);
+
+        expect(entry.engineCount).toBe(1);
+        expect(entry.engine).toBeDefined();
+        expect(entry.engine.manufacturer).toBeFalsy();
+        expect(entry.engine.engineType).toBe(EngineType.TURBOSHAFT);
+        expect(entry.engine.model).toBe("250-C20B");
+        expect(entry.engine.fuelType).toBe(FuelType.KEROSENE);
+
+        expect(entry.registrationType).toBe(RegistrationType.FULL);
+        expect(entry.registrationSuspended).toBeFalsy();
+        expect(entry.registrationExpiryDate).toBeFalsy();
+        expect(entry.firstRegisteredDate).toEqual(new SimpleDate(16, 3, 1989));
+
+        expect(entry.landingGear).toBe(LandingGearType.UNKNOWN);
+        expect(entry.airframeType).toBe(AirframeType.HELICOPTER);
+
+        expect(entry.propellerManufacturer).toBeFalsy();
+        expect(entry.propellerModel).toBeFalsy();
+        expect(entry.typeCertificateNumber).toBe("H2SW");
+
+        expect(entry.registeredHolder).toBeDefined();
+        expect(entry.registeredHolder.name).toBe("HELICOPTER TRANSPORT & TRAINING PTY LIMITED");
+        expect(entry.registeredHolder.address).toBeDefined();
+        expect(entry.registeredHolder.address.line1).toBe("PO Box 227");
+        expect(entry.registeredHolder.address.line2).toBeFalsy();
+        expect(entry.registeredHolder.address.suburb).toBe("GEORGES HALL");
+        expect(entry.registeredHolder.address.state).toBe("NSW");
+        expect(entry.registeredHolder.address.postcode).toBe("2198");
+        expect(entry.registeredHolder.address.country).toBe("Australia");
+        expect(entry.registeredHolder.commencementDate).toEqual(new SimpleDate(21, 12, 2017));
+
+        expect(entry.registeredOperator).toBeDefined();
+        expect(entry.registeredOperator.name).toBe("HELICOPTER TRANSPORT & TRAINING PTY LIMITED");
+        expect(entry.registeredOperator.address).toBeDefined();
+        expect(entry.registeredOperator.address.line1).toBe("PO Box 227");
+        expect(entry.registeredOperator.address.line2).toBeFalsy();
+        expect(entry.registeredOperator.address.suburb).toBe("GEORGES HALL");
+        expect(entry.registeredOperator.address.state).toBe("NSW");
+        expect(entry.registeredOperator.address.postcode).toBe("2198");
+        expect(entry.registeredOperator.address.country).toBe("Australia");
+        expect(entry.registeredOperator.commencementDate).toEqual(new SimpleDate(21, 12, 2017));
+
+        expect(entry.standardCoA).toBeDefined();
+        expect(entry.standardCoA.length).toBe(1);
+        expect(entry.standardCoA).toEqual(expect.arrayContaining([CertificationCategoryType.NORMAL]));
+        expect(entry.specialCoA).toBeFalsy();
+    });
 });
