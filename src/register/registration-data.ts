@@ -43,8 +43,8 @@ export class RegistrationData {
 
     landingGear: LandingGearType;
     airframeType: AirframeType;
-    standardCoA: CertificationCategoryType;
-    specialCoA?: CertificationCategoryType;
+    standardCoA: CertificationCategoryType[];
+    specialCoA?: CertificationCategoryType[];
 
     propellerManufacturer: string;
     propellerModel: string;

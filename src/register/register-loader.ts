@@ -9,6 +9,7 @@ import { ParsingOptions, readFile, WorkBook, utils, SSF } from 'xlsx';
 
 import { RegistrationData } from "./registration-data";
 import { RegistrationType } from "./registration-type";
+import { CertificationCategoryType } from "./certification-category-type";
 import { Address } from "./address";
 import { OwnerData } from "./owner-data";
 import { EngineData } from "./engine-data";
@@ -85,6 +86,8 @@ export class CASARegisterLoader {
 
             entry.registeredOperator = OwnerData.create(row[20], operator_add, operator_date);
 
+            entry.standardCoA = CASARegisterLoader.parseCertCategories(enum_mapper, row[31]);
+            entry.specialCoA = CASARegisterLoader.parseCertCategories(enum_mapper, row[32]);
 
             retval.push(entry);
         });
@@ -99,6 +102,26 @@ export class CASARegisterLoader {
             const date_data = SSF.parse_date_code(excelDate);
 
             retval = new SimpleDate(date_data.d, date_data.m, date_data.y);
+        }
+
+        return retval;
+    }
+
+    private static parseCertCategories(mapper: EnumMapper, raw: string): CertificationCategoryType[] {
+        if(!raw) {
+            return undefined;
+        }
+
+        let retval: CertificationCategoryType[] = [];
+
+        // General format is "Active (type1; type2;...)". Strip the leading and brackets.
+        if(raw.startsWith("Active ")) {
+            let bracket_data = raw.substring(8, raw.length - 1);
+            let parts = bracket_data.split(";");
+
+            parts.forEach(t => {
+                retval.push(mapper.lookupCertificationCategory(t));
+            })
         }
 
         return retval;

@@ -7,6 +7,7 @@
  */
 import { CASARegisterLoader } from '../../src/register/register-loader';
 import { RegistrationData } from '../../src/register/registration-data';
+import { CertificationCategoryType } from "../../src/register/certification-category-type";
 import { EngineType } from '../../src/register/engine-type';
 import { FuelType } from '../../src/register/fuel-type';
 import { LandingGearType } from '../../src/register/landing-gear-type';
@@ -89,5 +90,11 @@ describe("Loads correct data", () => {
         expect(entry.registeredOperator.address.postcode).toBe("0813");
         expect(entry.registeredOperator.address.country).toBe("Australia");
         expect(entry.registeredOperator.commencementDate).toEqual(new SimpleDate(15, 6, 2012));
+
+        expect(entry.standardCoA).toBeDefined();
+        expect(entry.standardCoA.length).toBe(2);
+        expect(entry.standardCoA).toEqual(expect.arrayContaining([CertificationCategoryType.ACROBATIC, CertificationCategoryType.NORMAL]));
+
+        expect(entry.specialCoA).toBeFalsy();
     });
 });
