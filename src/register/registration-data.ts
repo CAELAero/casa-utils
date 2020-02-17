@@ -27,7 +27,7 @@ export class RegistrationData {
     manufacturer: string;
 
     /**
-     *Country of origin of the manufacturer. This is where the manufacturer resides, but may
+     * Country of origin of the manufacturer. This is where the manufacturer resides, but may
      * not represent the actual country where the aircraft was assembled.
      */
     manufacturerCountry: string;
