@@ -57,37 +57,37 @@ export class EnumMapper {
     }
 
     public lookupRegistration(raw: string): RegistrationType {
-        let retval = this.reverseRegMap.get(raw ? raw.trim(): "");
+        const retval = this.reverseRegMap.get(raw ? raw.trim(): "");
 
         return retval ? retval : RegistrationType.UNKNOWN;
     }
 
     public lookupLandingGear(raw: string): LandingGearType {
-        let retval = this.reverseGearMap.get(raw ? raw.trim(): "");
+        const retval = this.reverseGearMap.get(raw ? raw.trim(): "");
 
         return retval ? retval : LandingGearType.UNKNOWN;
     }
 
     public lookupAirframe(raw: string): AirframeType {
-        let retval = this.reverseAirframeMap.get(raw ? raw.trim(): "");
+        const retval = this.reverseAirframeMap.get(raw ? raw.trim(): "");
 
         return retval ? retval : AirframeType.UNKNOWN;
     }
 
     public lookupCertificationCategory(raw: string): CertificationCategoryType {
-        let retval = this.reverseCategoryMap.get(raw ? raw.trim(): "");
+        const retval = this.reverseCategoryMap.get(raw ? raw.trim(): "");
 
         return retval ? retval : CertificationCategoryType.UNKNOWN;
     }
 
     public lookupEngine(raw: string): EngineType {
-        let retval = this.reverseEngineMap.get(raw ? raw.trim(): "");
+        const retval = this.reverseEngineMap.get(raw ? raw.trim(): "");
 
         return retval ? retval : EngineType.UNKNOWN;
     }
 
     public lookupFuel(raw: string): FuelType {
-        let retval = this.reverseFuelMap.get(raw ? raw.trim(): "");
+        const retval = this.reverseFuelMap.get(raw ? raw.trim(): "");
 
         return retval ? retval : FuelType.UNKNOWN;
     }

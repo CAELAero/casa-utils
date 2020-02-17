@@ -45,21 +45,21 @@ export class CASARegisterLoader {
         const enum_mapper = new EnumMapper();
 
         sheet_data.forEach(row => {
-            let entry = new RegistrationData();
+            const entry = new RegistrationData();
 
             entry.mark = "VH-" + row[0];
             entry.manufacturer = row[1];
             entry.manufacturerCountry = row[37];
-            entry.manufactureYear = parseInt(row[38]);
+            entry.manufactureYear = parseInt(row[38], 10);
 
             entry.type = row[2];
             entry.model = row[3];
             entry.serialNumber = row[4].toString();
-            entry.mtow = parseInt(row[5]);
-            entry.engineCount = parseInt(row[6]);
+            entry.mtow = parseInt(row[5], 10);
+            entry.engineCount = parseInt(row[6], 10);
 
             if(entry.engineCount > 0) {
-                let eng_data = EngineData.create(row[7], row[8], row[9].toString(), row[10]);
+                const eng_data = EngineData.create(row[7], row[8], row[9].toString(), row[10]);
                 entry.engine = eng_data;
             }
 
@@ -82,13 +82,13 @@ export class CASARegisterLoader {
 
             entry.typeCertificateNumber = row[36];
 
-            let holder_add = Address.create2Line(row[13], row[14], row[15], row[16], row[17].toString().padStart(4, '0'), row[18]);
-            let holder_date = CASARegisterLoader.parseDate(row[19]);
+            const holder_add = Address.create2Line(row[13], row[14], row[15], row[16], row[17].toString().padStart(4, '0'), row[18]);
+            const holder_date = CASARegisterLoader.parseDate(row[19]);
 
             entry.registeredHolder = OwnerData.create(row[12], holder_add, holder_date);
 
-            let operator_add = Address.create2Line(row[21], row[22], row[23], row[24], row[25].toString().padStart(4, '0'), row[26]);
-            let operator_date = CASARegisterLoader.parseDate(row[27]);
+            const operator_add = Address.create2Line(row[21], row[22], row[23], row[24], row[25].toString().padStart(4, '0'), row[26]);
+            const operator_date = CASARegisterLoader.parseDate(row[27]);
 
             entry.registeredOperator = OwnerData.create(row[20], operator_add, operator_date);
 
@@ -118,12 +118,12 @@ export class CASARegisterLoader {
             return undefined;
         }
 
-        let retval: CertificationCategoryType[] = [];
+        const retval: CertificationCategoryType[] = [];
 
         // General format is "Active (type1; type2;...)". Strip the leading and brackets.
         if(raw.startsWith("Active ")) {
-            let bracket_data = raw.substring(8, raw.length - 1);
-            let parts = bracket_data.split(";");
+            const bracket_data = raw.substring(8, raw.length - 1);
+            const parts = bracket_data.split(";");
 
             parts.forEach(t => {
                 retval.push(mapper.lookupCertificationCategory(t));
