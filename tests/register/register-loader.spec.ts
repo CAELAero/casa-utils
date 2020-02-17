@@ -282,4 +282,64 @@ describe("Loads correct data", () => {
         expect(entry.standardCoA).toEqual(expect.arrayContaining([CertificationCategoryType.NORMAL]));
         expect(entry.specialCoA).toBeFalsy();
     });
+
+    it("Handles a single balloon", () => {
+        let result:RegistrationData[] = CASARegisterLoader.listAllRegistrations("tests/register/data/single_row_balloon.csv");
+
+        expect(result).toBeTruthy();
+        expect(result.length).toBe(1);
+
+        let entry = result[0];
+
+        expect(entry.mark).toBe("VH-DHE");
+        expect(entry.manufacturer).toBe("KAVANAGH BALLOONS");
+        expect(entry.manufacturerCountry).toBe("Australia");
+        expect(entry.manufactureYear).toBe(2009);
+        expect(entry.type).toBeFalsy();
+        expect(entry.model).toBe("E-240");
+        expect(entry.serialNumber).toBe("E240-398");
+        expect(entry.mtow).toBe(1700);
+
+        expect(entry.engineCount).toBe(0);
+        expect(entry.engine).toBeFalsy();
+
+        expect(entry.registrationType).toBe(RegistrationType.FULL);
+        expect(entry.registrationSuspended).toBeFalsy();
+        expect(entry.registrationExpiryDate).toBeFalsy();
+        expect(entry.firstRegisteredDate).toEqual(new SimpleDate(5, 5, 2011));
+
+        expect(entry.landingGear).toBe(LandingGearType.UNKNOWN);
+        expect(entry.airframeType).toBe(AirframeType.BALLOON_MANNED);
+
+        expect(entry.propellerManufacturer).toBeFalsy();
+        expect(entry.propellerModel).toBeFalsy();
+        expect(entry.typeCertificateNumber).toBe("VL504");
+
+        expect(entry.registeredHolder).toBeDefined();
+        expect(entry.registeredHolder.name).toBe("AIR VISTAS PTY LIMITED");
+        expect(entry.registeredHolder.address).toBeDefined();
+        expect(entry.registeredHolder.address.line1).toBe("PO Box 5361");
+        expect(entry.registeredHolder.address.line2).toBeFalsy();
+        expect(entry.registeredHolder.address.suburb).toBe("WOLLONGONG");
+        expect(entry.registeredHolder.address.state).toBe("NSW");
+        expect(entry.registeredHolder.address.postcode).toBe("2500");
+        expect(entry.registeredHolder.address.country).toBe("Australia");
+        expect(entry.registeredHolder.commencementDate).toEqual(new SimpleDate(25, 2, 2013));
+
+        expect(entry.registeredOperator).toBeDefined();
+        expect(entry.registeredOperator.name).toBe("AIR VISTAS PTY LIMITED");
+        expect(entry.registeredOperator.address).toBeDefined();
+        expect(entry.registeredOperator.address.line1).toBe("PO Box 5361");
+        expect(entry.registeredOperator.address.line2).toBeFalsy();
+        expect(entry.registeredOperator.address.suburb).toBe("WOLLONGONG");
+        expect(entry.registeredOperator.address.state).toBe("NSW");
+        expect(entry.registeredOperator.address.postcode).toBe("2500");
+        expect(entry.registeredOperator.address.country).toBe("Australia");
+        expect(entry.registeredOperator.commencementDate).toEqual(new SimpleDate(25, 2, 2013));
+
+        expect(entry.standardCoA).toBeDefined();
+        expect(entry.standardCoA.length).toBe(1);
+        expect(entry.standardCoA).toEqual(expect.arrayContaining([CertificationCategoryType.BALLOON]));
+        expect(entry.specialCoA).toBeFalsy();
+    });
 });
