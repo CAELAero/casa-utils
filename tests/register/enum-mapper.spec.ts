@@ -34,6 +34,18 @@ describe('RegistrationType handling', () => {
 
         expect(mapper.lookupRegistration("junk")).toBe(RegistrationType.UNKNOWN);
     });
+
+    it("Maps key with leading space", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupRegistration(" Interim Registration")).toBe(RegistrationType.INTERIM);
+    });
+
+    it("Maps key with trailing space", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupRegistration("Interim Registration ")).toBe(RegistrationType.INTERIM);
+    });
 });
 
 describe('AirframeType handling', () => {
@@ -50,6 +62,18 @@ describe('AirframeType handling', () => {
         let mapper = new EnumMapper();
 
         expect(mapper.lookupAirframe("junk")).toBe(AirframeType.UNKNOWN);
+    });
+
+    it("Maps key with leading space", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupAirframe(" Ornithopter")).toBe(AirframeType.ORNITHOPTER);
+    });
+
+    it("Maps key with trailing space", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupAirframe("Ornithopter ")).toBe(AirframeType.ORNITHOPTER);
     });
 });
 
@@ -68,6 +92,18 @@ describe('LandingGearType handling', () => {
 
         expect(mapper.lookupLandingGear("junk")).toBe(LandingGearType.UNKNOWN);
     });
+
+    it("Maps key with leading space", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupLandingGear(" Skid")).toBe(LandingGearType.SKID);
+    });
+
+    it("Maps key with trailing space", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupLandingGear("Skid ")).toBe(LandingGearType.SKID);
+    });
 });
 
 describe('CertificationCategoryType handling', () => {
@@ -84,6 +120,18 @@ describe('CertificationCategoryType handling', () => {
         let mapper = new EnumMapper();
 
         expect(mapper.lookupCertificationCategory("junk")).toBe(CertificationCategoryType.UNKNOWN);
+    });
+
+    it("Maps key with leading space", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupCertificationCategory(" Acrobatic")).toBe(CertificationCategoryType.ACROBATIC);
+    });
+
+    it("Maps key with trailing space", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupCertificationCategory("Acrobatic ")).toBe(CertificationCategoryType.ACROBATIC);
     });
 });
 
@@ -102,6 +150,18 @@ describe('FuelType handling', () => {
 
         expect(mapper.lookupFuel("junk")).toBe(FuelType.UNKNOWN);
     });
+
+    it("Maps key with leading space", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupFuel(" Gasoline")).toBe(FuelType.GASOLINE);
+    });
+
+    it("Maps key with trailing space", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupFuel("Gasoline ")).toBe(FuelType.GASOLINE);
+    });
 });
 
 describe('EngineType handling', () => {
@@ -118,6 +178,18 @@ describe('EngineType handling', () => {
         let mapper = new EnumMapper();
 
         expect(mapper.lookupEngine("junk")).toBe(EngineType.UNKNOWN);
+    });
+
+    it("Maps key with leading space", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupEngine(" Piston")).toBe(EngineType.PISTON);
+    });
+
+    it("Maps key with trailing space", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupEngine("Piston ")).toBe(EngineType.PISTON);
     });
 });
 
