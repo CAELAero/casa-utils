@@ -59,7 +59,7 @@ export class CASARegisterLoader {
             entry.engineCount = parseInt(row[6]);
 
             if(entry.engineCount > 0) {
-                let eng_data = EngineData.create(row[7], row[8], row[9], row[10]);
+                let eng_data = EngineData.create(row[7], row[8], row[9].toString(), row[10]);
                 entry.engine = eng_data;
             }
 

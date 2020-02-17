@@ -155,4 +155,67 @@ describe("Loads correct data", () => {
         expect(entry.standardCoA).toBeFalsy();
         expect(entry.specialCoA).toBeFalsy();
     });
+
+    it("Handles a single sustainer glider", () => {
+        let result:RegistrationData[] = CASARegisterLoader.listAllRegistrations("tests/register/data/single_row_sustainer_glider.csv");
+
+        expect(result).toBeTruthy();
+        expect(result.length).toBe(1);
+
+        let entry = result[0];
+
+        expect(entry.mark).toBe("VH-GLQ");
+        expect(entry.manufacturer).toBe("DG FLUGZEUGBAU GMBH");
+        expect(entry.manufacturerCountry).toBe("Germany");
+        expect(entry.manufactureYear).toBe(2009);
+        expect(entry.type).toBeFalsy();
+        expect(entry.model).toBe("LS 10");
+        expect(entry.serialNumber).toBe("L10-019");
+        expect(entry.mtow).toBe(540);
+
+        expect(entry.engineCount).toBe(1);
+        expect(entry.engine).toBeDefined();
+        expect(entry.engine.manufacturer).toBe("SOLO KLEINMOTOREN GMBH");
+        expect(entry.engine.engineType).toBe(EngineType.PISTON);
+        expect(entry.engine.model).toBe("2350");
+        expect(entry.engine.fuelType).toBe(FuelType.GASOLINE);
+
+        expect(entry.registrationType).toBe(RegistrationType.FULL);
+        expect(entry.registrationSuspended).toBeFalsy();
+        expect(entry.registrationExpiryDate).toBeFalsy();
+        expect(entry.firstRegisteredDate).toEqual(new SimpleDate(18, 11, 2009));
+
+        expect(entry.landingGear).toBe(LandingGearType.UNKNOWN);
+        expect(entry.airframeType).toBe(AirframeType.GLIDER_MOTOR);
+
+        expect(entry.propellerManufacturer).toBe("METALIC VARIABLE PITCH PROPELLER - MANUFACT. & MODEL NOT IDENTIFIED");
+        expect(entry.propellerModel).toBe("MOTOR GLIDER");
+        expect(entry.typeCertificateNumber).toBeFalsy();
+
+
+        expect(entry.registeredHolder).toBeDefined();
+        expect(entry.registeredHolder.name).toBe("DURIEU, Brian Philip");
+        expect(entry.registeredHolder.address).toBeDefined();
+        expect(entry.registeredHolder.address.line1).toBe("316 Moore Park Road");
+        expect(entry.registeredHolder.address.line2).toBeFalsy();
+        expect(entry.registeredHolder.address.suburb).toBe("PADDINGTON");
+        expect(entry.registeredHolder.address.state).toBe("NSW");
+        expect(entry.registeredHolder.address.postcode).toBe("2021");
+        expect(entry.registeredHolder.address.country).toBe("Australia");
+        expect(entry.registeredHolder.commencementDate).toEqual(new SimpleDate(18, 11, 2009));
+
+        expect(entry.registeredOperator).toBeDefined();
+        expect(entry.registeredOperator.name).toBe("DURIEU, Brian Philip");
+        expect(entry.registeredOperator.address).toBeDefined();
+        expect(entry.registeredOperator.address.line1).toBe("316 Moore Park Road");
+        expect(entry.registeredOperator.address.line2).toBeFalsy();
+        expect(entry.registeredOperator.address.suburb).toBe("PADDINGTON");
+        expect(entry.registeredOperator.address.state).toBe("NSW");
+        expect(entry.registeredOperator.address.postcode).toBe("2021");
+        expect(entry.registeredOperator.address.country).toBe("Australia");
+        expect(entry.registeredOperator.commencementDate).toEqual(new SimpleDate(18, 11, 2009));
+
+        expect(entry.standardCoA).toBeFalsy();
+        expect(entry.specialCoA).toBeFalsy();
+    });
 });
