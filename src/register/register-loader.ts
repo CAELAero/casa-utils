@@ -22,6 +22,13 @@ import { SimpleDate } from "./simple-date";
  * https://www.casa.gov.au/standard-page/data-files-field-definitions
  */
 export class CASARegisterLoader {
+
+    /**
+     * List all the registration entries described by the source file.
+     *
+     * @param {string} source The path to the file to load. May be absolute or relative path
+     * @return The entries found in the file, as parsed.
+     */
     public static listAllRegistrations(source: string): RegistrationData[] {
         if (!source) {
           throw new Error('No source given to parse');

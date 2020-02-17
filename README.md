@@ -26,9 +26,17 @@ bower install @cael-aero/casa-utils --save
 
 ## Usage
 
-### Typescript
+```javascript
+var casaUtils = require('@cael-aero/casa-utils');
+var data = casaUtils.listAllRegistrations('somefile.xls');
+```
 
-### Javascript
+### TypeScript
+```typescript
+import { RegistrationData, CASARegisterLoader } from '@cael-aero/casa-utils';
+
+let data:RegistrationData[] = CASARegisterLoader.listAllRegistrations('somefile.xls');
+```
 
 ## API Examples
 
