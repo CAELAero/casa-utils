@@ -35,6 +35,18 @@ describe('RegistrationType handling', () => {
         expect(mapper.lookupRegistration("junk")).toBe(RegistrationType.UNKNOWN);
     });
 
+    it("Maps null key to UNKNOWN", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupRegistration(null)).toBe(RegistrationType.UNKNOWN);
+    });
+
+    it("Maps undefined key to UNKNOWN", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupRegistration(undefined)).toBe(RegistrationType.UNKNOWN);
+    });
+
     it("Maps key with leading space", () => {
         let mapper = new EnumMapper();
 
@@ -62,6 +74,18 @@ describe('AirframeType handling', () => {
         let mapper = new EnumMapper();
 
         expect(mapper.lookupAirframe("junk")).toBe(AirframeType.UNKNOWN);
+    });
+
+    it("Maps null key to UNKNOWN", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupAirframe(null)).toBe(AirframeType.UNKNOWN);
+    });
+
+    it("Maps undefined key to UNKNOWN", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupAirframe(undefined)).toBe(AirframeType.UNKNOWN);
     });
 
     it("Maps key with leading space", () => {
@@ -93,6 +117,18 @@ describe('LandingGearType handling', () => {
         expect(mapper.lookupLandingGear("junk")).toBe(LandingGearType.UNKNOWN);
     });
 
+    it("Maps null key to UNKNOWN", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupLandingGear(null)).toBe(LandingGearType.UNKNOWN);
+    });
+
+    it("Maps undefined key to UNKNOWN", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupLandingGear(undefined)).toBe(LandingGearType.UNKNOWN);
+    });
+
     it("Maps key with leading space", () => {
         let mapper = new EnumMapper();
 
@@ -120,6 +156,18 @@ describe('CertificationCategoryType handling', () => {
         let mapper = new EnumMapper();
 
         expect(mapper.lookupCertificationCategory("junk")).toBe(CertificationCategoryType.UNKNOWN);
+    });
+
+    it("Maps null key to UNKNOWN", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupCertificationCategory(null)).toBe(CertificationCategoryType.UNKNOWN);
+    });
+
+    it("Maps undefined key to UNKNOWN", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupCertificationCategory(undefined)).toBe(CertificationCategoryType.UNKNOWN);
     });
 
     it("Maps key with leading space", () => {
@@ -151,6 +199,18 @@ describe('FuelType handling', () => {
         expect(mapper.lookupFuel("junk")).toBe(FuelType.UNKNOWN);
     });
 
+    it("Maps null key to UNKNOWN", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupFuel(null)).toBe(FuelType.UNKNOWN);
+    });
+
+    it("Maps undefined key to UNKNOWN", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupFuel(undefined)).toBe(FuelType.UNKNOWN);
+    });
+
     it("Maps key with leading space", () => {
         let mapper = new EnumMapper();
 
@@ -178,6 +238,18 @@ describe('EngineType handling', () => {
         let mapper = new EnumMapper();
 
         expect(mapper.lookupEngine("junk")).toBe(EngineType.UNKNOWN);
+    });
+
+    it("Maps null key to UNKNOWN", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupEngine(null)).toBe(EngineType.UNKNOWN);
+    });
+
+    it("Maps undefined key to UNKNOWN", () => {
+        let mapper = new EnumMapper();
+
+        expect(mapper.lookupEngine(undefined)).toBe(EngineType.UNKNOWN);
     });
 
     it("Maps key with leading space", () => {
