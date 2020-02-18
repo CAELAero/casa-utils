@@ -52,57 +52,63 @@ export class CASARegisterLoader {
         const enum_mapper = new EnumMapper();
 
         sheet_data.forEach(row => {
-            const entry = new RegistrationData();
+            try {
+                const entry = new RegistrationData();
 
-            entry.mark = "VH-" + row[0];
-            entry.manufacturer = row[1];
-            entry.manufacturerCountry = row[37];
-            entry.manufactureYear = parseInt(row[38], 10);
+                entry.mark = "VH-" + row[0];
+                entry.manufacturer = row[1];
+                entry.manufacturerCountry = row[37];
+                entry.manufactureYear = parseInt(row[38], 10);
 
-            entry.type = row[2];
-            entry.model = row[3];
-            entry.serialNumber = row[4].toString();
-            entry.mtow = parseInt(row[5], 10);
-            entry.engineCount = parseInt(row[6], 10);
+                entry.type = row[2];
+                entry.model = row[3];
+                entry.serialNumber = row[4].toString();
+                entry.mtow = parseInt(row[5], 10);
+                entry.engineCount = parseInt(row[6], 10);
 
-            if(entry.engineCount > 0) {
-                const eng_data = EngineData.create(row[7], row[8], row[9].toString(), row[10]);
-                entry.engine = eng_data;
+                if(entry.engineCount > 0) {
+                    const eng_data = EngineData.create(row[7], row[8], row[9].toString(), row[10]);
+                    entry.engine = eng_data;
+                }
+
+                entry.registrationType = enum_mapper.lookupRegistration(row[11]);
+                entry.registrationSuspended = row[40] === "Suspended"
+
+                entry.firstRegisteredDate = CASARegisterLoader.parseDate(row[28]);
+                entry.registrationExpiryDate = CASARegisterLoader.parseDate(row[29]);
+
+                entry.landingGear = enum_mapper.lookupLandingGear(row[29]);
+                entry.airframeType = enum_mapper.lookupAirframe(row[30]);
+
+                if(row[34] !== "AIRCRAFT NOT FITTED WITH PROPELLER") {
+                    entry.propellerManufacturer = row[34].trim();
+                }
+
+                if(row[35] !== "NOT APPLICABLE") {
+                    entry.propellerModel = row[35].trim();
+                }
+
+                entry.typeCertificateNumber = row[36];
+
+                const holder_postcode = row[17] ? row[17].toString().padStart(4, '0') : null;
+                const holder_add = Address.create2Line(row[13].trim(), row[14], row[15].trim(), row[16].trim(), holder_postcode, row[18].trim());
+                const holder_date = CASARegisterLoader.parseDate(row[19]);
+
+                entry.registeredHolder = OwnerData.create(row[12], holder_add, holder_date);
+
+                const operator_postcode = row[25] ? row[25].toString().padStart(4, '0') : null;
+                const operator_add = Address.create2Line(row[21].trim(), row[22], row[23].trim(), row[24].trim(), operator_postcode, row[26].trim());
+                const operator_date = CASARegisterLoader.parseDate(row[27]);
+
+                entry.registeredOperator = OwnerData.create(row[20], operator_add, operator_date);
+
+                entry.standardCoA = CASARegisterLoader.parseCertCategories(enum_mapper, row[31]);
+                entry.specialCoA = CASARegisterLoader.parseCertCategories(enum_mapper, row[32]);
+
+                retval.push(entry);
+            } catch(error) {
+                console.error(`Error reading row ${row} due to ${error.message}`, error);
             }
-
-            entry.registrationType = enum_mapper.lookupRegistration(row[11]);
-            entry.registrationSuspended = row[40] === "Suspended"
-
-            entry.firstRegisteredDate = CASARegisterLoader.parseDate(row[28]);
-            entry.registrationExpiryDate = CASARegisterLoader.parseDate(row[29]);
-
-            entry.landingGear = enum_mapper.lookupLandingGear(row[29]);
-            entry.airframeType = enum_mapper.lookupAirframe(row[30]);
-
-            if(row[34] !== "AIRCRAFT NOT FITTED WITH PROPELLER") {
-                entry.propellerManufacturer = row[34];
-            }
-
-            if(row[35] !== "NOT APPLICABLE") {
-                entry.propellerModel = row[35];
-            }
-
-            entry.typeCertificateNumber = row[36];
-
-            const holder_add = Address.create2Line(row[13], row[14], row[15], row[16], row[17].toString().padStart(4, '0'), row[18]);
-            const holder_date = CASARegisterLoader.parseDate(row[19]);
-
-            entry.registeredHolder = OwnerData.create(row[12], holder_add, holder_date);
-
-            const operator_add = Address.create2Line(row[21], row[22], row[23], row[24], row[25].toString().padStart(4, '0'), row[26]);
-            const operator_date = CASARegisterLoader.parseDate(row[27]);
-
-            entry.registeredOperator = OwnerData.create(row[20], operator_add, operator_date);
-
-            entry.standardCoA = CASARegisterLoader.parseCertCategories(enum_mapper, row[31]);
-            entry.specialCoA = CASARegisterLoader.parseCertCategories(enum_mapper, row[32]);
-
-            retval.push(entry);
         });
 
         return retval;

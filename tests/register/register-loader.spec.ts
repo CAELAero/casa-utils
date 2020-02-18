@@ -343,3 +343,80 @@ describe("Loads correct data", () => {
         expect(entry.specialCoA).toBeFalsy();
     });
 });
+
+describe("Handles bad data", () => {
+    it("No postcode in foreign countries", () => {
+        let result:RegistrationData[] = CASARegisterLoader.listAllRegistrations("tests/register/data/single_row_foreign_address_no_postcode.csv");
+
+        expect(result).toBeTruthy();
+        expect(result.length).toBe(1);
+
+        let entry = result[0];
+
+        expect(entry.mark).toBe("VH-ZXD");
+        expect(entry.manufacturer).toBe("LEONARDO S.P.A. HELICOPTERS");
+        expect(entry.manufacturerCountry).toBe("Italy");
+        expect(entry.manufactureYear).toBe(2016);
+        expect(entry.type).toBeFalsy();
+        expect(entry.model).toBe("AW139");
+        expect(entry.serialNumber).toBe("31738");
+        expect(entry.mtow).toBe(7000);
+
+        expect(entry.engineCount).toBe(2);
+        expect(entry.engine).toBeDefined();
+        expect(entry.engine.manufacturer).toBe("PRATT & WHITNEY CANADA INC");
+        expect(entry.engine.engineType).toBe(EngineType.TURBOSHAFT);
+        expect(entry.engine.model).toBe("PT6C-67C");
+        expect(entry.engine.fuelType).toBe(FuelType.KEROSENE);
+
+        expect(entry.registrationType).toBe(RegistrationType.FULL);
+        expect(entry.registrationSuspended).toBeFalsy();
+        expect(entry.registrationExpiryDate).toBeFalsy();
+        expect(entry.firstRegisteredDate).toEqual(new SimpleDate(13, 10, 2016));
+
+        expect(entry.landingGear).toBe(LandingGearType.UNKNOWN);
+        expect(entry.airframeType).toBe(AirframeType.HELICOPTER);
+
+        expect(entry.propellerManufacturer).toBeFalsy();
+        expect(entry.propellerModel).toBeFalsy();
+        expect(entry.typeCertificateNumber).toBe("EASA.R.006");
+
+        expect(entry.registeredHolder).toBeDefined();
+        expect(entry.registeredHolder.name).toBe("LCIH AUSTRALIA TWO LIMITED");
+        expect(entry.registeredHolder.address).toBeDefined();
+        expect(entry.registeredHolder.address.line1).toBe("C/o Lease Corporation International Limited");
+        expect(entry.registeredHolder.address.line2).toBe("IFSC 6 George's Dock");
+        expect(entry.registeredHolder.address.suburb).toBe("DUBLIN");
+        expect(entry.registeredHolder.address.state).toBe("Dublin 1");
+        expect(entry.registeredHolder.address.postcode).toBeFalsy();
+        expect(entry.registeredHolder.address.country).toBe("Ireland");
+        expect(entry.registeredHolder.commencementDate).toEqual(new SimpleDate(13, 10, 2016));
+
+        expect(entry.registeredOperator).toBeDefined();
+        expect(entry.registeredOperator.name).toBe("NORTHERN NSW HELICOPTER RESCUE SERVICE LIMITED");
+        expect(entry.registeredOperator.address).toBeDefined();
+        expect(entry.registeredOperator.address.line1).toBe("PO Box 230");
+        expect(entry.registeredOperator.address.line2).toBeFalsy();
+        expect(entry.registeredOperator.address.suburb).toBe("NEW LAMBTON");
+        expect(entry.registeredOperator.address.state).toBe("NSW");
+        expect(entry.registeredOperator.address.postcode).toBe("2305");
+        expect(entry.registeredOperator.address.country).toBe("Australia");
+        expect(entry.registeredOperator.commencementDate).toEqual(new SimpleDate(13, 10, 2016));
+
+        expect(entry.standardCoA).toBeDefined();
+        expect(entry.standardCoA.length).toBe(1);
+        expect(entry.standardCoA).toEqual(expect.arrayContaining([CertificationCategoryType.TRANSPORT]));
+        expect(entry.specialCoA).toBeFalsy();
+    });
+});
+
+/** Normally skipped so that we don't take forever on the tests. */
+describe.skip("Load full file", () => {
+    it("Can load the whole 2019 dataset ", () => {
+        let result:RegistrationData[] = CASARegisterLoader.listAllRegistrations("tests/register/data/acrftreg_2019.csv");
+
+        expect(result).toBeTruthy();
+        expect(result.length).toBe(15685);
+
+    });
+});
