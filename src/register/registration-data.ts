@@ -32,7 +32,7 @@ export class RegistrationData {
      */
     manufacturerCountry: string;
 
-    /** The year the airframe was manufactured in */
+    /** The year the airframe was manufactured in. Set to 0 if the raw data has an error or is not provided.  */
     manufactureYear: number;
 
     /** The airframe type, as defined by the manufacturer. Often no defined. */
@@ -44,7 +44,7 @@ export class RegistrationData {
     /** The serial number of the airframe */
     serialNumber: string;
 
-    /** Maximum take off weight, in kg */
+    /** Maximum take off weight, in kg. Set to 0 if the raw data has an error or is not provided. */
     mtow: number;
 
     /** if aircraft has an engine, details here, otherwise undefined */

@@ -58,13 +58,13 @@ export class CASARegisterLoader {
                 entry.mark = "VH-" + row[0];
                 entry.manufacturer = row[1];
                 entry.manufacturerCountry = row[37];
-                entry.manufactureYear = parseInt(row[38], 10);
+                entry.manufactureYear = parseInt(row[38], 10) || 0;
 
                 entry.type = row[2];
                 entry.model = row[3];
                 entry.serialNumber = row[4].toString();
-                entry.mtow = parseInt(row[5], 10);
-                entry.engineCount = parseInt(row[6], 10);
+                entry.mtow = parseInt(row[5], 10) || 0;
+                entry.engineCount = parseInt(row[6], 10) || 0;
 
                 if(entry.engineCount > 0) {
                     const eng_data = EngineData.create(row[7], row[8], row[9].toString(), row[10]);
@@ -107,6 +107,8 @@ export class CASARegisterLoader {
 
                 retval.push(entry);
             } catch(error) {
+                // Should never get here since the above parsing is quite forgiving. Likely this is due
+                // to a stream or other interrupt error.
                 console.error(`Error reading row ${row} due to ${error.message}`, error);
             }
         });

@@ -408,6 +408,18 @@ describe("Handles bad data", () => {
         expect(entry.standardCoA).toEqual(expect.arrayContaining([CertificationCategoryType.TRANSPORT]));
         expect(entry.specialCoA).toBeFalsy();
     });
+
+    it("Skips errors as the default behaviour", () => {
+        let result:RegistrationData[] = CASARegisterLoader.listAllRegistrations("tests/register/data/multi_row_with_error.csv");
+
+        expect(result).toBeTruthy();
+        expect(result.length).toBe(2);
+
+        // Only bother to test the known error as we assume the rest passed in the other
+        // happy path tests.
+        expect(result[0].mtow).toBe(0);
+        expect(result[0].mark).toBe("VH-DGI");
+    });
 });
 
 /** Normally skipped so that we don't take forever on the tests. */
@@ -417,6 +429,5 @@ describe.skip("Load full file", () => {
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(15685);
-
     });
 });
