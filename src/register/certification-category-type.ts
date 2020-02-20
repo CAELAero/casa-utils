@@ -17,7 +17,7 @@ export enum CertificationCategoryType {
   COMMUTER = 'Commuter',
   EXPERIMENTAL = 'Experimental',
   INTERMEDIATE = 'Intermediate',
-  LSA = 'Light sport aircraft',
+  LSA = 'Light Sport Aircraft',
   LIMITED = 'Limited',
   BALLOON = 'Manned Free Balloon',
   NORMAL = 'Normal',
@@ -30,5 +30,6 @@ export enum CertificationCategoryType {
   SPECIAL_OTHER = 'Special Class of Aircraft',
   TRANSPORT = 'Transport',
   UTILITY = 'Utility',
+  EXPIRED = "Expired",
   UNKNOWN = 'Unknown',
 }
