@@ -9,18 +9,18 @@ import { EngineType } from './engine-type';
 import { FuelType } from './fuel-type';
 
 export class EngineData {
-    manufacturer: string;
-    engineType: EngineType;
-    model: string;
-    fuelType: FuelType;
+  manufacturer: string;
+  engineType: EngineType;
+  model: string;
+  fuelType: FuelType;
 
-    public static create(manufacturer: string, type: EngineType, model: string, fuel: FuelType): EngineData {
-        const retval = new EngineData();
-        retval.manufacturer = manufacturer;
-        retval.engineType = type;
-        retval.model = model
-        retval.fuelType = fuel;
+  public static create(manufacturer: string, type: EngineType, model: string, fuel: FuelType): EngineData {
+    const retval = new EngineData();
+    retval.manufacturer = manufacturer;
+    retval.engineType = type;
+    retval.model = model;
+    retval.fuelType = fuel;
 
-        return retval;
-    }
+    return retval;
+  }
 }

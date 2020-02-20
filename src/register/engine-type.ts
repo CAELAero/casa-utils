@@ -6,12 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 export enum EngineType {
-    PISTON = "Piston",
-    ROTARY = "Rotary",
-    ELECTRIC = "Electric",
-    TURBOFAN = "Turbofan",
-    TURBOJET = "Turbojet",
-    TURBOPROP = "Turboprop",
-    TURBOSHAFT = "Turboshaft",
-    UNKNOWN = "Unknown"
+  PISTON = 'Piston',
+  ROTARY = 'Rotary',
+  ELECTRIC = 'Electric',
+  TURBOFAN = 'Turbofan',
+  TURBOJET = 'Turbojet',
+  TURBOPROP = 'Turboprop',
+  TURBOSHAFT = 'Turboshaft',
+  UNKNOWN = 'Unknown',
 }
