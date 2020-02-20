@@ -342,6 +342,36 @@ describe("Loads correct data", () => {
         expect(entry.standardCoA).toEqual(expect.arrayContaining([CertificationCategoryType.BALLOON]));
         expect(entry.specialCoA).toBeFalsy();
     });
+
+    it("Expired CoA", () => {
+        let result:RegistrationData[] = CASARegisterLoader.listAllRegistrations("tests/register/data/single_row_expired_coa.csv");
+
+        expect(result).toBeTruthy();
+        expect(result.length).toBe(1);
+
+        // Only bother to test the known error as we assume the rest passed in the other
+        // happy path tests.
+        expect(result[0].standardCoA).toBeFalsy();
+
+        expect(result[0].specialCoA).toBeDefined();
+        expect(result[0].specialCoA.length).toBe(1);
+        expect(result[0].specialCoA).toEqual(expect.arrayContaining([CertificationCategoryType.EXPIRED]));
+    });
+
+    it("Draft CoA", () => {
+        let result:RegistrationData[] = CASARegisterLoader.listAllRegistrations("tests/register/data/single_row_draft_coa.csv");
+
+        expect(result).toBeTruthy();
+        expect(result.length).toBe(1);
+
+        // Only bother to test the known error as we assume the rest passed in the other
+        // happy path tests.
+        expect(result[0].standardCoA).toBeDefined();
+        expect(result[0].standardCoA.length).toBe(1);
+        expect(result[0].standardCoA).toEqual(expect.arrayContaining([CertificationCategoryType.DRAFT]));
+
+        expect(result[0].specialCoA).toBeFalsy();
+    });
 });
 
 describe("Handles bad data", () => {
@@ -420,9 +450,37 @@ describe("Handles bad data", () => {
         expect(result[0].mtow).toBe(0);
         expect(result[0].mark).toBe("VH-DGI");
     });
+
+    it("Numerical propeller model", () => {
+        let result:RegistrationData[] = CASARegisterLoader.listAllRegistrations("tests/register/data/single_row_numerical_prop_model.csv");
+
+        expect(result).toBeTruthy();
+        expect(result.length).toBe(1);
+
+        // Only bother to test the known error as we assume the rest passed in the other
+        // happy path tests.
+        expect(result[0].propellerModel).toBe("283");
+    });
+
+    it("No suburb error", () => {
+        let result:RegistrationData[] = CASARegisterLoader.listAllRegistrations("tests/register/data/single_row_no_state.csv");
+
+        expect(result).toBeTruthy();
+        expect(result.length).toBe(1);
+
+        let entry = result[0];
+
+        // Only bother to test the known error as we assume the rest passed in the other
+        // happy path tests.
+        expect(entry.registeredHolder).toBeDefined();
+        expect(entry.registeredHolder.name).toBe("ZULU INVESTMENTS PTE. LTD.");
+        expect(entry.registeredHolder.address).toBeDefined();
+        expect(entry.registeredHolder.address.suburb).toBe("SINGAPORE");
+        expect(entry.registeredHolder.address.state).toBeFalsy();
+    });
 });
 
-/** Normally skipped so that we don't take forever on the tests. */
+/** Normally skipped so that we don't take forever on the tests and this doesn't add any value */
 describe.skip("Load full file", () => {
     it("Can load the whole 2019 dataset ", () => {
         let result:RegistrationData[] = CASARegisterLoader.listAllRegistrations("tests/register/data/acrftreg_2019.csv");

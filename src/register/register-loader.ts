@@ -79,24 +79,27 @@ export class CASARegisterLoader {
         entry.landingGear = enum_mapper.lookupLandingGear(row[29]);
         entry.airframeType = enum_mapper.lookupAirframe(row[30]);
 
-        if (row[34] !== 'AIRCRAFT NOT FITTED WITH PROPELLER') {
-          entry.propellerManufacturer = row[34].trim();
+        if (row[34] && row[34] !== 'AIRCRAFT NOT FITTED WITH PROPELLER') {
+          entry.propellerManufacturer = row[34].toString().trim();
         }
 
-        if (row[35] !== 'NOT APPLICABLE') {
-          entry.propellerModel = row[35].trim();
+        if (row[35] && row[35] !== 'NOT APPLICABLE') {
+          // ToString before trim here since we can occasionally get model numbers come through
+          // as just a plain number. The parser will treat that as a number. Trim() is then
+          // used in the case where we have a normal string, but with extra whitespace.
+          entry.propellerModel = row[35].toString().trim();
         }
 
         entry.typeCertificateNumber = row[36];
 
         const holder_postcode = row[17] ? row[17].toString().padStart(4, '0') : null;
         const holder_add = Address.create2Line(
-          row[13].trim(),
-          row[14],
-          row[15].trim(),
-          row[16].trim(),
+          CASARegisterLoader.parseString(row[13]),
+          CASARegisterLoader.parseString(row[14]),
+          CASARegisterLoader.parseString(row[15]),
+          CASARegisterLoader.parseString(row[16]),
           holder_postcode,
-          row[18].trim(),
+          CASARegisterLoader.parseString(row[18]),
         );
         const holder_date = CASARegisterLoader.parseDate(row[19]);
 
@@ -104,19 +107,19 @@ export class CASARegisterLoader {
 
         const operator_postcode = row[25] ? row[25].toString().padStart(4, '0') : null;
         const operator_add = Address.create2Line(
-          row[21].trim(),
-          row[22],
-          row[23].trim(),
-          row[24].trim(),
+          CASARegisterLoader.parseString(row[21]),
+          CASARegisterLoader.parseString(row[22]),
+          CASARegisterLoader.parseString(row[23]),
+          CASARegisterLoader.parseString(row[24]),
           operator_postcode,
-          row[26].trim(),
+          CASARegisterLoader.parseString(row[26]),
         );
         const operator_date = CASARegisterLoader.parseDate(row[27]);
 
         entry.registeredOperator = OwnerData.create(row[20], operator_add, operator_date);
 
-        entry.standardCoA = CASARegisterLoader.parseCertCategories(enum_mapper, row[31]);
-        entry.specialCoA = CASARegisterLoader.parseCertCategories(enum_mapper, row[32]);
+        entry.standardCoA = CASARegisterLoader.parseCertCategories(enum_mapper, row[31], source);
+        entry.specialCoA = CASARegisterLoader.parseCertCategories(enum_mapper, row[32], source);
 
         retval.push(entry);
       } catch (error) {
@@ -127,6 +130,10 @@ export class CASARegisterLoader {
     });
 
     return retval;
+  }
+
+  private static parseString(src: string): string {
+    return src ? src.toString().trim() : undefined;
   }
 
   private static parseDate(excelDate: number): SimpleDate {
@@ -141,12 +148,13 @@ export class CASARegisterLoader {
     return retval;
   }
 
-  private static parseCertCategories(mapper: EnumMapper, raw: string): CertificationCategoryType[] {
+  private static parseCertCategories(mapper: EnumMapper, raw: string, fname: string): CertificationCategoryType[] {
     if (!raw) {
       return undefined;
     }
 
     const retval: CertificationCategoryType[] = [];
+    raw = raw.trim();
 
     // General format is "Active (type1; type2;...)". Strip the leading and brackets.
     if (raw.startsWith('Active ')) {
@@ -156,6 +164,8 @@ export class CASARegisterLoader {
       parts.forEach(t => {
         retval.push(mapper.lookupCertificationCategory(t));
       });
+    } else {
+        retval.push(mapper.lookupCertificationCategory(raw));
     }
 
     return retval;

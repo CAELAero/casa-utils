@@ -31,5 +31,6 @@ export enum CertificationCategoryType {
   TRANSPORT = 'Transport',
   UTILITY = 'Utility',
   EXPIRED = "Expired",
+  DRAFT = "Draft",
   UNKNOWN = 'Unknown',
 }
