@@ -20,7 +20,6 @@ import { SimpleDate } from './simple-date';
  * https://www.casa.gov.au/standard-page/data-files-field-definitions
  */
 export class CASADeregistrationLoader {
-
     /**
      * List all the deregistration entries described by the source file.
      *
