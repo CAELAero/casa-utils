@@ -36,7 +36,7 @@ export class SimpleDate {
     }
 
     public static parse(raw: string): SimpleDate {
-        const parsed = moment(raw, 'DD MMMM YYYY', true).toObject();
+        const parsed = moment(raw, ['DD/MM/YYYY', 'DD MMMM YYYY'], true).toObject();
 
         return new SimpleDate(parsed.date, parsed.months + 1, parsed.years);
     }

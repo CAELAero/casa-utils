@@ -15,7 +15,6 @@ import { EnumMapper } from './enum-mapper';
 import { OwnerData } from './owner-data';
 import { RegistrationData } from './registration-data';
 import { RegistrationType } from './registration-type';
-import { SimpleDate } from './simple-date';
 
 /**
  * Loader for the CASA aircraft register files. These are CSV files with the

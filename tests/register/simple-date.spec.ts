@@ -29,4 +29,13 @@ describe("Date parsing", () => {
         expect(result.month).toBe(12);
         expect(result.year).toBe(1995);
     });
+
+    it("Can parse \"03/12/1995\"", () => {
+        let result = SimpleDate.parse("03/12/1995");
+
+        expect(result).toBeTruthy();
+        expect(result.day).toBe(3);
+        expect(result.month).toBe(12);
+        expect(result.year).toBe(1995);
+    });
 });
