@@ -6,10 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 export enum FuelType {
-  KEROSENE = 'Kerosene',
-  GASOLINE = 'Gasoline',
-  LIQUID_GAS = 'Liquid Gas',
-  DIESEL = 'Diesel',
-  NOT_APPLICABLE = 'Not Applicable',
-  UNKNOWN = 'Unknown',
+    KEROSENE = 'Kerosene',
+    GASOLINE = 'Gasoline',
+    LIQUID_GAS = 'Liquid Gas',
+    DIESEL = 'Diesel',
+    NOT_APPLICABLE = 'Not Applicable',
+    UNKNOWN = 'Unknown',
 }

@@ -9,16 +9,16 @@ import { Address } from './address';
 import { SimpleDate } from './simple-date';
 
 export class OwnerData {
-  address: Address;
-  name: string;
-  commencementDate: SimpleDate;
+    address: Address;
+    name: string;
+    commencementDate: SimpleDate;
 
-  public static create(name: string, address: Address, date: SimpleDate): OwnerData {
-    const retval = new OwnerData();
-    retval.name = name;
-    retval.address = address;
-    retval.commencementDate = date;
+    public static create(name: string, address: Address, date: SimpleDate): OwnerData {
+        const retval = new OwnerData();
+        retval.name = name;
+        retval.address = address;
+        retval.commencementDate = date;
 
-    return retval;
-  }
+        return retval;
+    }
 }

@@ -22,152 +22,152 @@ import { SimpleDate } from './simple-date';
  * https://www.casa.gov.au/standard-page/data-files-field-definitions
  */
 export class CASARegisterLoader {
-  /**
-   * List all the registration entries described by the source file.
-   *
-   * @param {string} source The path to the file to load. May be absolute or relative path
-   * @return The entries found in the file, as parsed.
-   */
-  public static listAllRegistrations(source: string): RegistrationData[] {
-    if (!source) {
-      throw new Error('No source given to parse');
-    }
-
-    const options = {
-      cellDates: false,
-    };
-
-    const workbook: WorkBook = readFile(source, options);
-    const loaded_data = workbook.Sheets[workbook.SheetNames[0]];
-
-    // Could we find the data? undefined or null here if not. Throw error
-    const sheet_data: any[][] = utils.sheet_to_json(loaded_data, {
-      header: 1,
-      blankrows: false,
-      range: 1,
-    });
-
-    const retval: RegistrationData[] = [];
-    const enum_mapper = new EnumMapper();
-
-    sheet_data.forEach(row => {
-      try {
-        const entry = new RegistrationData();
-
-        entry.mark = 'VH-' + row[0];
-        entry.manufacturer = row[1];
-        entry.manufacturerCountry = row[37];
-        entry.manufactureYear = parseInt(row[38], 10) || 0;
-
-        entry.type = row[2];
-        entry.model = row[3];
-        entry.serialNumber = row[4].toString();
-        entry.mtow = parseInt(row[5], 10) || 0;
-        entry.engineCount = parseInt(row[6], 10) || 0;
-
-        if (entry.engineCount > 0) {
-          const eng_data = EngineData.create(row[7], row[8], row[9].toString(), row[10]);
-          entry.engine = eng_data;
+    /**
+     * List all the registration entries described by the source file.
+     *
+     * @param {string} source The path to the file to load. May be absolute or relative path
+     * @return The entries found in the file, as parsed.
+     */
+    public static listAllRegistrations(source: string): RegistrationData[] {
+        if (!source) {
+            throw new Error('No source given to parse');
         }
 
-        entry.registrationType = enum_mapper.lookupRegistration(row[11]);
-        entry.registrationSuspended = row[40] === 'Suspended';
+        const options = {
+            cellDates: false,
+        };
 
-        entry.firstRegisteredDate = CASARegisterLoader.parseDate(row[28]);
-        entry.registrationExpiryDate = CASARegisterLoader.parseDate(row[29]);
+        const workbook: WorkBook = readFile(source, options);
+        const loaded_data = workbook.Sheets[workbook.SheetNames[0]];
 
-        entry.landingGear = enum_mapper.lookupLandingGear(row[29]);
-        entry.airframeType = enum_mapper.lookupAirframe(row[30]);
+        // Could we find the data? undefined or null here if not. Throw error
+        const sheet_data: any[][] = utils.sheet_to_json(loaded_data, {
+            header: 1,
+            blankrows: false,
+            range: 1,
+        });
 
-        if (row[34] && row[34] !== 'AIRCRAFT NOT FITTED WITH PROPELLER') {
-          entry.propellerManufacturer = row[34].toString().trim();
+        const retval: RegistrationData[] = [];
+        const enum_mapper = new EnumMapper();
+
+        sheet_data.forEach(row => {
+            try {
+                const entry = new RegistrationData();
+
+                entry.mark = 'VH-' + row[0];
+                entry.manufacturer = row[1];
+                entry.manufacturerCountry = row[37];
+                entry.manufactureYear = parseInt(row[38], 10) || 0;
+
+                entry.type = row[2];
+                entry.model = row[3];
+                entry.serialNumber = row[4].toString();
+                entry.mtow = parseInt(row[5], 10) || 0;
+                entry.engineCount = parseInt(row[6], 10) || 0;
+
+                if (entry.engineCount > 0) {
+                    const eng_data = EngineData.create(row[7], row[8], row[9].toString(), row[10]);
+                    entry.engine = eng_data;
+                }
+
+                entry.registrationType = enum_mapper.lookupRegistration(row[11]);
+                entry.registrationSuspended = row[40] === 'Suspended';
+
+                entry.firstRegisteredDate = CASARegisterLoader.parseDate(row[28]);
+                entry.registrationExpiryDate = CASARegisterLoader.parseDate(row[29]);
+
+                entry.landingGear = enum_mapper.lookupLandingGear(row[29]);
+                entry.airframeType = enum_mapper.lookupAirframe(row[30]);
+
+                if (row[34] && row[34] !== 'AIRCRAFT NOT FITTED WITH PROPELLER') {
+                    entry.propellerManufacturer = row[34].toString().trim();
+                }
+
+                if (row[35] && row[35] !== 'NOT APPLICABLE') {
+                    // ToString before trim here since we can occasionally get model numbers come through
+                    // as just a plain number. The parser will treat that as a number. Trim() is then
+                    // used in the case where we have a normal string, but with extra whitespace.
+                    entry.propellerModel = row[35].toString().trim();
+                }
+
+                entry.typeCertificateNumber = row[36];
+
+                const holder_postcode = row[17] ? row[17].toString().padStart(4, '0') : null;
+                const holder_add = Address.create2Line(
+                    CASARegisterLoader.parseString(row[13]),
+                    CASARegisterLoader.parseString(row[14]),
+                    CASARegisterLoader.parseString(row[15]),
+                    CASARegisterLoader.parseString(row[16]),
+                    holder_postcode,
+                    CASARegisterLoader.parseString(row[18]),
+                );
+                const holder_date = CASARegisterLoader.parseDate(row[19]);
+
+                entry.registeredHolder = OwnerData.create(row[12], holder_add, holder_date);
+
+                const operator_postcode = row[25] ? row[25].toString().padStart(4, '0') : null;
+                const operator_add = Address.create2Line(
+                    CASARegisterLoader.parseString(row[21]),
+                    CASARegisterLoader.parseString(row[22]),
+                    CASARegisterLoader.parseString(row[23]),
+                    CASARegisterLoader.parseString(row[24]),
+                    operator_postcode,
+                    CASARegisterLoader.parseString(row[26]),
+                );
+                const operator_date = CASARegisterLoader.parseDate(row[27]);
+
+                entry.registeredOperator = OwnerData.create(row[20], operator_add, operator_date);
+
+                entry.standardCoA = CASARegisterLoader.parseCertCategories(enum_mapper, row[31], source);
+                entry.specialCoA = CASARegisterLoader.parseCertCategories(enum_mapper, row[32], source);
+
+                retval.push(entry);
+            } catch (error) {
+                // Should never get here since the above parsing is quite forgiving. Likely this is due
+                // to a stream or other interrupt error.
+                console.error(`Error reading row ${row} due to ${error.message}`, error);
+            }
+        });
+
+        return retval;
+    }
+
+    private static parseString(src: string): string {
+        return src ? src.toString().trim() : undefined;
+    }
+
+    private static parseDate(excelDate: number): SimpleDate {
+        let retval = null;
+
+        if (excelDate) {
+            const date_data = SSF.parse_date_code(excelDate);
+
+            retval = new SimpleDate(date_data.d, date_data.m, date_data.y);
         }
 
-        if (row[35] && row[35] !== 'NOT APPLICABLE') {
-          // ToString before trim here since we can occasionally get model numbers come through
-          // as just a plain number. The parser will treat that as a number. Trim() is then
-          // used in the case where we have a normal string, but with extra whitespace.
-          entry.propellerModel = row[35].toString().trim();
+        return retval;
+    }
+
+    private static parseCertCategories(mapper: EnumMapper, raw: string, fname: string): CertificationCategoryType[] {
+        if (!raw) {
+            return undefined;
         }
 
-        entry.typeCertificateNumber = row[36];
+        const retval: CertificationCategoryType[] = [];
+        raw = raw.trim();
 
-        const holder_postcode = row[17] ? row[17].toString().padStart(4, '0') : null;
-        const holder_add = Address.create2Line(
-          CASARegisterLoader.parseString(row[13]),
-          CASARegisterLoader.parseString(row[14]),
-          CASARegisterLoader.parseString(row[15]),
-          CASARegisterLoader.parseString(row[16]),
-          holder_postcode,
-          CASARegisterLoader.parseString(row[18]),
-        );
-        const holder_date = CASARegisterLoader.parseDate(row[19]);
+        // General format is "Active (type1; type2;...)". Strip the leading and brackets.
+        if (raw.startsWith('Active ')) {
+            const bracket_data = raw.substring(8, raw.length - 1);
+            const parts = bracket_data.split(';');
 
-        entry.registeredHolder = OwnerData.create(row[12], holder_add, holder_date);
+            parts.forEach(t => {
+                retval.push(mapper.lookupCertificationCategory(t));
+            });
+        } else {
+            retval.push(mapper.lookupCertificationCategory(raw));
+        }
 
-        const operator_postcode = row[25] ? row[25].toString().padStart(4, '0') : null;
-        const operator_add = Address.create2Line(
-          CASARegisterLoader.parseString(row[21]),
-          CASARegisterLoader.parseString(row[22]),
-          CASARegisterLoader.parseString(row[23]),
-          CASARegisterLoader.parseString(row[24]),
-          operator_postcode,
-          CASARegisterLoader.parseString(row[26]),
-        );
-        const operator_date = CASARegisterLoader.parseDate(row[27]);
-
-        entry.registeredOperator = OwnerData.create(row[20], operator_add, operator_date);
-
-        entry.standardCoA = CASARegisterLoader.parseCertCategories(enum_mapper, row[31], source);
-        entry.specialCoA = CASARegisterLoader.parseCertCategories(enum_mapper, row[32], source);
-
-        retval.push(entry);
-      } catch (error) {
-        // Should never get here since the above parsing is quite forgiving. Likely this is due
-        // to a stream or other interrupt error.
-        console.error(`Error reading row ${row} due to ${error.message}`, error);
-      }
-    });
-
-    return retval;
-  }
-
-  private static parseString(src: string): string {
-    return src ? src.toString().trim() : undefined;
-  }
-
-  private static parseDate(excelDate: number): SimpleDate {
-    let retval = null;
-
-    if (excelDate) {
-      const date_data = SSF.parse_date_code(excelDate);
-
-      retval = new SimpleDate(date_data.d, date_data.m, date_data.y);
+        return retval;
     }
-
-    return retval;
-  }
-
-  private static parseCertCategories(mapper: EnumMapper, raw: string, fname: string): CertificationCategoryType[] {
-    if (!raw) {
-      return undefined;
-    }
-
-    const retval: CertificationCategoryType[] = [];
-    raw = raw.trim();
-
-    // General format is "Active (type1; type2;...)". Strip the leading and brackets.
-    if (raw.startsWith('Active ')) {
-      const bracket_data = raw.substring(8, raw.length - 1);
-      const parts = bracket_data.split(';');
-
-      parts.forEach(t => {
-        retval.push(mapper.lookupCertificationCategory(t));
-      });
-    } else {
-        retval.push(mapper.lookupCertificationCategory(raw));
-    }
-
-    return retval;
-  }
 }
