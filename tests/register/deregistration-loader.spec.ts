@@ -88,42 +88,6 @@ describe("Loads correct data", () => {
 });
 
 describe("Handles bad data", () => {
-    it.skip("No postcode in foreign countries", () => {
-        let result:DeregistrationData[] = CASADeregistrationLoader.listAllDeregistrations("tests/register/data/deregistration/single_row_foreign_address_no_postcode.csv");
-
-        expect(result).toBeTruthy();
-        expect(result.length).toBe(1);
-
-        let entry = result[0];
-
-        expect(entry.mark).toBe("VH-ZXD");
-        expect(entry.manufacturer).toBe("LEONARDO S.P.A. HELICOPTERS");
-        expect(entry.model).toBe("AW139");
-        expect(entry.serialNumber).toBe("31738");
-
-        expect(entry.registeredHolder).toBeDefined();
-        expect(entry.registeredHolder.name).toBe("LCIH AUSTRALIA TWO LIMITED");
-        expect(entry.registeredHolder.address).toBeDefined();
-        expect(entry.registeredHolder.address.line1).toBe("C/o Lease Corporation International Limited");
-        expect(entry.registeredHolder.address.line2).toBe("IFSC 6 George's Dock");
-        expect(entry.registeredHolder.address.suburb).toBe("DUBLIN");
-        expect(entry.registeredHolder.address.state).toBe("Dublin 1");
-        expect(entry.registeredHolder.address.postcode).toBeFalsy();
-        expect(entry.registeredHolder.address.country).toBe("Ireland");
-        expect(entry.registeredHolder.commencementDate).toBeFalsy();
-
-        expect(entry.registeredOperator).toBeDefined();
-        expect(entry.registeredOperator.name).toBe("NORTHERN NSW HELICOPTER RESCUE SERVICE LIMITED");
-        expect(entry.registeredOperator.address).toBeDefined();
-        expect(entry.registeredOperator.address.line1).toBe("PO Box 230");
-        expect(entry.registeredOperator.address.line2).toBeFalsy();
-        expect(entry.registeredOperator.address.suburb).toBe("NEW LAMBTON");
-        expect(entry.registeredOperator.address.state).toBe("NSW");
-        expect(entry.registeredOperator.address.postcode).toBe("2305");
-        expect(entry.registeredOperator.address.country).toBe("Australia");
-        expect(entry.registeredOperator.commencementDate).toBeFalsy();
-    });
-
     it("No addresses provided error", () => {
         let result:DeregistrationData[] = CASADeregistrationLoader.listAllDeregistrations("tests/register/data/deregistration/single_row_no_addresses.csv");
 
