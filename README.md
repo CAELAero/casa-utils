@@ -60,7 +60,15 @@ import { DeregistrationData, CASADeregistrationLoader } from '@cael-aero/casa-ut
 
 let data:DeregistrationData[] = CASADeregistrationLoader.listAllDeregistrations('somefile.csv');
 ```
+
+### Read Adds and Returns to the register data
  
+```typescript
+import { RegistrationChangeData, CASARegistrationChangeLoader } from '@cael-aero/casa-utils';
+
+let data:RegistrationChangeData[] = CASARegistrationChangeLoader.listAllRegistrationChanges('somefile.csv');
+```
+
 ## License
 
 This source code is licensed under the BSD-style license found in the
