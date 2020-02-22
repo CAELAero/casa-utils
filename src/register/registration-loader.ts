@@ -7,13 +7,14 @@
  */
 import { ParsingOptions, readFile, WorkBook, utils, SSF } from 'xlsx';
 
-import { RegistrationData } from './registration-data';
-import { RegistrationType } from './registration-type';
-import { CertificationCategoryType } from './certification-category-type';
 import { Address } from './address';
-import { OwnerData } from './owner-data';
+import { CASALoaderUtils } from './casa-loader-utils';
+import { CertificationCategoryType } from './certification-category-type';
 import { EngineData } from './engine-data';
 import { EnumMapper } from './enum-mapper';
+import { OwnerData } from './owner-data';
+import { RegistrationData } from './registration-data';
+import { RegistrationType } from './registration-type';
 import { SimpleDate } from './simple-date';
 
 /**
@@ -21,12 +22,13 @@ import { SimpleDate } from './simple-date';
  * column format defined here:
  * https://www.casa.gov.au/standard-page/data-files-field-definitions
  */
-export class CASARegisterLoader {
+export class CASARegistrationLoader {
     /**
      * List all the registration entries described by the source file.
      *
      * @param {string} source The path to the file to load. May be absolute or relative path
-     * @return The entries found in the file, as parsed.
+     * @return The entries found in the file, as parsed. If nothing is found, returns
+     *   a zero length array
      */
     public static listAllRegistrations(source: string): RegistrationData[] {
         if (!source) {
@@ -73,8 +75,8 @@ export class CASARegisterLoader {
                 entry.registrationType = enum_mapper.lookupRegistration(row[11]);
                 entry.registrationSuspended = row[40] === 'Suspended';
 
-                entry.firstRegisteredDate = CASARegisterLoader.parseDate(row[28]);
-                entry.registrationExpiryDate = CASARegisterLoader.parseDate(row[29]);
+                entry.firstRegisteredDate = CASALoaderUtils.parseDate(row[28]);
+                entry.registrationExpiryDate = CASALoaderUtils.parseDate(row[29]);
 
                 entry.landingGear = enum_mapper.lookupLandingGear(row[29]);
                 entry.airframeType = enum_mapper.lookupAirframe(row[30]);
@@ -94,32 +96,32 @@ export class CASARegisterLoader {
 
                 const holder_postcode = row[17] ? row[17].toString().padStart(4, '0') : null;
                 const holder_add = Address.create2Line(
-                    CASARegisterLoader.parseString(row[13]),
-                    CASARegisterLoader.parseString(row[14]),
-                    CASARegisterLoader.parseString(row[15]),
-                    CASARegisterLoader.parseString(row[16]),
+                    CASALoaderUtils.parseString(row[13]),
+                    CASALoaderUtils.parseString(row[14]),
+                    CASALoaderUtils.parseString(row[15]),
+                    CASALoaderUtils.parseString(row[16]),
                     holder_postcode,
-                    CASARegisterLoader.parseString(row[18]),
+                    CASALoaderUtils.parseString(row[18]),
                 );
-                const holder_date = CASARegisterLoader.parseDate(row[19]);
+                const holder_date = CASALoaderUtils.parseDate(row[19]);
 
                 entry.registeredHolder = OwnerData.create(row[12], holder_add, holder_date);
 
                 const operator_postcode = row[25] ? row[25].toString().padStart(4, '0') : null;
                 const operator_add = Address.create2Line(
-                    CASARegisterLoader.parseString(row[21]),
-                    CASARegisterLoader.parseString(row[22]),
-                    CASARegisterLoader.parseString(row[23]),
-                    CASARegisterLoader.parseString(row[24]),
+                    CASALoaderUtils.parseString(row[21]),
+                    CASALoaderUtils.parseString(row[22]),
+                    CASALoaderUtils.parseString(row[23]),
+                    CASALoaderUtils.parseString(row[24]),
                     operator_postcode,
-                    CASARegisterLoader.parseString(row[26]),
+                    CASALoaderUtils.parseString(row[26]),
                 );
-                const operator_date = CASARegisterLoader.parseDate(row[27]);
+                const operator_date = CASALoaderUtils.parseDate(row[27]);
 
                 entry.registeredOperator = OwnerData.create(row[20], operator_add, operator_date);
 
-                entry.standardCoA = CASARegisterLoader.parseCertCategories(enum_mapper, row[31], source);
-                entry.specialCoA = CASARegisterLoader.parseCertCategories(enum_mapper, row[32], source);
+                entry.standardCoA = CASALoaderUtils.parseCertCategories(enum_mapper, row[31], source);
+                entry.specialCoA = CASALoaderUtils.parseCertCategories(enum_mapper, row[32], source);
 
                 retval.push(entry);
             } catch (error) {
@@ -128,45 +130,6 @@ export class CASARegisterLoader {
                 console.error(`Error reading row ${row} due to ${error.message}`, error);
             }
         });
-
-        return retval;
-    }
-
-    private static parseString(src: string): string {
-        return src ? src.toString().trim() : undefined;
-    }
-
-    private static parseDate(excelDate: number): SimpleDate {
-        let retval = null;
-
-        if (excelDate) {
-            const date_data = SSF.parse_date_code(excelDate);
-
-            retval = new SimpleDate(date_data.d, date_data.m, date_data.y);
-        }
-
-        return retval;
-    }
-
-    private static parseCertCategories(mapper: EnumMapper, raw: string, fname: string): CertificationCategoryType[] {
-        if (!raw) {
-            return undefined;
-        }
-
-        const retval: CertificationCategoryType[] = [];
-        raw = raw.trim();
-
-        // General format is "Active (type1; type2;...)". Strip the leading and brackets.
-        if (raw.startsWith('Active ')) {
-            const bracket_data = raw.substring(8, raw.length - 1);
-            const parts = bracket_data.split(';');
-
-            parts.forEach(t => {
-                retval.push(mapper.lookupCertificationCategory(t));
-            });
-        } else {
-            retval.push(mapper.lookupCertificationCategory(raw));
-        }
 
         return retval;
     }
