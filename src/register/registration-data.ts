@@ -5,7 +5,7 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { OwnerData } from './owner-data';
+import { RegistrationBaseData } from './registration-base-data';
 import { EngineData } from './engine-data';
 
 import { RegistrationType } from './registration-type';
@@ -18,13 +18,7 @@ import { SimpleDate } from './simple-date';
 /**
  * Represents all the known data about a single registration entry.
  */
-export class RegistrationData {
-    /** The registration mark, including VH- prefix */
-    mark: string;
-
-    /** The name of the manufacturer of the airframe */
-    manufacturer: string;
-
+export class RegistrationData extends RegistrationBaseData {
     /**
      * Country of origin of the manufacturer. This is where the manufacturer resides, but may
      * not represent the actual country where the aircraft was assembled.
@@ -36,12 +30,6 @@ export class RegistrationData {
 
     /** The airframe type, as defined by the manufacturer. Often no defined. */
     type: string;
-
-    /** The official model name of the aircraft */
-    model: string;
-
-    /** The serial number of the airframe */
-    serialNumber: string;
 
     /** Maximum take off weight, in kg. Set to 0 if the raw data has an error or is not provided. */
     mtow: number;
@@ -63,12 +51,6 @@ export class RegistrationData {
 
     /** Date the aircraft was first officially registered in Australia. */
     firstRegisteredDate: SimpleDate;
-
-    /** Registered Operator details */
-    registeredOperator: OwnerData;
-
-    /** Registered Holder details */
-    registeredHolder: OwnerData;
 
     /** The type of landing gear the aircraft has. Often unknown */
     landingGear: LandingGearType;
