@@ -15,6 +15,7 @@
 * Repository https://github.com/CAELAero/casa-utils
 * API Documentation: https://caelaero.github.io/casa-utils/
 * CASA Aircraft Register Data Files: https://www.casa.gov.au/aircraft/civil-aircraft-register/aircraft-register-data-files
+* CASA Aircraft Register Update Data Files: https://www.casa.gov.au/standard-page/update-data-files
  
 ## Installation
 
@@ -33,15 +34,33 @@ var data = casaUtils.listAllRegistrations('somefile.xls');
 
 ### TypeScript
 ```typescript
-import { RegistrationData, CASARegisterLoader } from '@cael-aero/casa-utils';
+import { RegistrationData, CASARegistrationLoader } from '@cael-aero/casa-utils';
 
-let data:RegistrationData[] = CASARegisterLoader.listAllRegistrations('somefile.xls');
+let data:RegistrationData[] = CASARegistrationLoader.listAllRegistrations('somefile.xls');
 ```
 
 ## API Examples
 
-TBD
+### Read Registration Data
 
+Download the complete registration data file from here: https://www.casa.gov.au/aircraft/civil-aircraft-register/aircraft-register-data-files
+
+```typescript
+import { RegistrationData, CASARegistrationLoader } from '@cael-aero/casa-utils';
+
+let data:RegistrationData[] = CASARegistrationLoader.listAllRegistrations('aircraftreg_2020.xls');
+```
+
+### Read Deregistration Data
+
+Download the complete deregistation data file from here: https://www.casa.gov.au/standard-page/update-data-files 
+
+```typescript
+import { DeregistrationData, CASADeregistrationLoader } from '@cael-aero/casa-utils';
+
+let data:DeregistrationData[] = CASADeregistrationLoader.listAllDeregistrations('somefile.csv');
+```
+ 
 ## License
 
 This source code is licensed under the BSD-style license found in the
