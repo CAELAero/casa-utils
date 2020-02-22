@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CASARegisterLoader | @cael-aero/casa-utils</title>
+	<title>DeregistrationData | @cael-aero/casa-utils</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_register_loader_.html">&quot;register-loader&quot;</a>
+					<a href="../modules/_deregistration_data_.html">&quot;deregistration-data&quot;</a>
 				</li>
 				<li>
-					<a href="_register_loader_.casaregisterloader.html">CASARegisterLoader</a>
+					<a href="_deregistration_data_.deregistrationdata.html">DeregistrationData</a>
 				</li>
 			</ul>
-			<h1>Class CASARegisterLoader</h1>
+			<h1>Class DeregistrationData</h1>
 		</div>
 	</div>
 </header>
@@ -72,9 +72,8 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Loader for the CASA aircraft register files. These are CSV files with the
-							column format defined here:
-						<a href="https://www.casa.gov.au/standard-page/data-files-field-definitions">https://www.casa.gov.au/standard-page/data-files-field-definitions</a></p>
+						<p>Represents a deregistration of a mark. A smaller subset of the basic
+						registration as it doesn&#39;t care about engines etc.</p>
 					</div>
 				</div>
 			</section>
@@ -82,7 +81,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">CASARegisterLoader</span>
+						<span class="target">DeregistrationData</span>
 					</li>
 				</ul>
 			</section>
@@ -91,98 +90,144 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Methods</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_register_loader_.casaregisterloader.html#listallregistrations" class="tsd-kind-icon">list<wbr>All<wbr>Registrations</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="_register_loader_.casaregisterloader.html#parsecertcategories" class="tsd-kind-icon">parse<wbr>Cert<wbr>Categories</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="_register_loader_.casaregisterloader.html#parsedate" class="tsd-kind-icon">parse<wbr>Date</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_deregistration_data_.deregistrationdata.html#effectivedate" class="tsd-kind-icon">effective<wbr>Date</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_deregistration_data_.deregistrationdata.html#manufacturer" class="tsd-kind-icon">manufacturer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_deregistration_data_.deregistrationdata.html#mark" class="tsd-kind-icon">mark</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_deregistration_data_.deregistrationdata.html#model" class="tsd-kind-icon">model</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_deregistration_data_.deregistrationdata.html#reason" class="tsd-kind-icon">reason</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_deregistration_data_.deregistrationdata.html#registeredholder" class="tsd-kind-icon">registered<wbr>Holder</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_deregistration_data_.deregistrationdata.html#registeredoperator" class="tsd-kind-icon">registered<wbr>Operator</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_deregistration_data_.deregistrationdata.html#serialnumber" class="tsd-kind-icon">serial<wbr>Number</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="listallregistrations" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> list<wbr>All<wbr>Registrations</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">list<wbr>All<wbr>Registrations<span class="tsd-signature-symbol">(</span>source<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_registration_data_.registrationdata.html" class="tsd-signature-type">RegistrationData</a><span class="tsd-signature-symbol">[]</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/ab086a9/src/register/register-loader.ts#L32">register-loader.ts:32</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>List all the registration entries described by the source file.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>source: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The path to the file to load. May be absolute or relative path</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_registration_data_.registrationdata.html" class="tsd-signature-type">RegistrationData</a><span class="tsd-signature-symbol">[]</span></h4>
-							<p>The entries found in the file, as parsed.</p>
-						</li>
-					</ul>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="effectivedate" class="tsd-anchor"></a>
+					<h3>effective<wbr>Date</h3>
+					<div class="tsd-signature tsd-kind-icon">effective<wbr>Date<span class="tsd-signature-symbol">:</span> <a href="_simple_date_.simpledate.html" class="tsd-signature-type">SimpleDate</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/bb6037c/src/register/deregistration-data.ts#L29">deregistration-data.ts:29</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Effective Date of deregistration</p>
+						</div>
+					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
-					<a name="parsecertcategories" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> parse<wbr>Cert<wbr>Categories</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">parse<wbr>Cert<wbr>Categories<span class="tsd-signature-symbol">(</span>mapper<span class="tsd-signature-symbol">: </span><a href="_enum_mapper_.enummapper.html" class="tsd-signature-type">EnumMapper</a>, raw<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/_certification_category_type_.certificationcategorytype.html" class="tsd-signature-type">CertificationCategoryType</a><span class="tsd-signature-symbol">[]</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/ab086a9/src/register/register-loader.ts#L131">register-loader.ts:131</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>mapper: <a href="_enum_mapper_.enummapper.html" class="tsd-signature-type">EnumMapper</a></h5>
-								</li>
-								<li>
-									<h5>raw: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../enums/_certification_category_type_.certificationcategorytype.html" class="tsd-signature-type">CertificationCategoryType</a><span class="tsd-signature-symbol">[]</span></h4>
-						</li>
-					</ul>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="manufacturer" class="tsd-anchor"></a>
+					<h3>manufacturer</h3>
+					<div class="tsd-signature tsd-kind-icon">manufacturer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/bb6037c/src/register/deregistration-data.ts#L20">deregistration-data.ts:20</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The name of the manufacturer of the airframe</p>
+						</div>
+					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
-					<a name="parsedate" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> parse<wbr>Date</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">parse<wbr>Date<span class="tsd-signature-symbol">(</span>excelDate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_simple_date_.simpledate.html" class="tsd-signature-type">SimpleDate</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/ab086a9/src/register/register-loader.ts#L119">register-loader.ts:119</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>excelDate: <span class="tsd-signature-type">number</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_simple_date_.simpledate.html" class="tsd-signature-type">SimpleDate</a></h4>
-						</li>
-					</ul>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="mark" class="tsd-anchor"></a>
+					<h3>mark</h3>
+					<div class="tsd-signature tsd-kind-icon">mark<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/bb6037c/src/register/deregistration-data.ts#L17">deregistration-data.ts:17</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The registration mark, including VH- prefix</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="model" class="tsd-anchor"></a>
+					<h3>model</h3>
+					<div class="tsd-signature tsd-kind-icon">model<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/bb6037c/src/register/deregistration-data.ts#L23">deregistration-data.ts:23</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The official model name of the aircraft</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="reason" class="tsd-anchor"></a>
+					<h3>reason</h3>
+					<div class="tsd-signature tsd-kind-icon">reason<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/bb6037c/src/register/deregistration-data.ts#L44">deregistration-data.ts:44</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The reason for deregistration</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="registeredholder" class="tsd-anchor"></a>
+					<h3>registered<wbr>Holder</h3>
+					<div class="tsd-signature tsd-kind-icon">registered<wbr>Holder<span class="tsd-signature-symbol">:</span> <a href="_owner_data_.ownerdata.html" class="tsd-signature-type">OwnerData</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/bb6037c/src/register/deregistration-data.ts#L41">deregistration-data.ts:41</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Registered Holder details at the time of deregistration. Note that there will be no
+							commencement date for this change.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="registeredoperator" class="tsd-anchor"></a>
+					<h3>registered<wbr>Operator</h3>
+					<div class="tsd-signature tsd-kind-icon">registered<wbr>Operator<span class="tsd-signature-symbol">:</span> <a href="_owner_data_.ownerdata.html" class="tsd-signature-type">OwnerData</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/bb6037c/src/register/deregistration-data.ts#L35">deregistration-data.ts:35</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Registered Operator details at the time of deregistration. Note that there will be no
+							commencement date for this change.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="serialnumber" class="tsd-anchor"></a>
+					<h3>serial<wbr>Number</h3>
+					<div class="tsd-signature tsd-kind-icon">serial<wbr>Number<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/bb6037c/src/register/deregistration-data.ts#L26">deregistration-data.ts:26</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The serial number of the airframe</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -199,7 +244,16 @@
 						<a href="../modules/_airframe_type_.html">&quot;airframe-<wbr>type&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="../modules/_casa_loader_utils_.html">&quot;casa-<wbr>loader-<wbr>utils&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_certification_category_type_.html">&quot;certification-<wbr>category-<wbr>type&quot;</a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_deregistration_data_.html">&quot;deregistration-<wbr>data&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_deregistration_loader_.html">&quot;deregistration-<wbr>loader&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_engine_data_.html">&quot;engine-<wbr>data&quot;</a>
@@ -219,11 +273,11 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_owner_data_.html">&quot;owner-<wbr>data&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="../modules/_register_loader_.html">&quot;register-<wbr>loader&quot;</a>
-					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_registration_data_.html">&quot;registration-<wbr>data&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_registration_loader_.html">&quot;registration-<wbr>loader&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_registration_type_.html">&quot;registration-<wbr>type&quot;</a>
@@ -238,16 +292,31 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_register_loader_.casaregisterloader.html" class="tsd-kind-icon">CASARegister<wbr>Loader</a>
+						<a href="_deregistration_data_.deregistrationdata.html" class="tsd-kind-icon">Deregistration<wbr>Data</a>
 						<ul>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="_register_loader_.casaregisterloader.html#listallregistrations" class="tsd-kind-icon">list<wbr>All<wbr>Registrations</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_deregistration_data_.deregistrationdata.html#effectivedate" class="tsd-kind-icon">effective<wbr>Date</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
-								<a href="_register_loader_.casaregisterloader.html#parsecertcategories" class="tsd-kind-icon">parse<wbr>Cert<wbr>Categories</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_deregistration_data_.deregistrationdata.html#manufacturer" class="tsd-kind-icon">manufacturer</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
-								<a href="_register_loader_.casaregisterloader.html#parsedate" class="tsd-kind-icon">parse<wbr>Date</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_deregistration_data_.deregistrationdata.html#mark" class="tsd-kind-icon">mark</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_deregistration_data_.deregistrationdata.html#model" class="tsd-kind-icon">model</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_deregistration_data_.deregistrationdata.html#reason" class="tsd-kind-icon">reason</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_deregistration_data_.deregistrationdata.html#registeredholder" class="tsd-kind-icon">registered<wbr>Holder</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_deregistration_data_.deregistrationdata.html#registeredoperator" class="tsd-kind-icon">registered<wbr>Operator</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_deregistration_data_.deregistrationdata.html#serialnumber" class="tsd-kind-icon">serial<wbr>Number</a>
 							</li>
 						</ul>
 					</li>
