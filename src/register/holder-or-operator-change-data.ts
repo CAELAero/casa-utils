@@ -17,7 +17,6 @@ import { SimpleDate } from './simple-date';
  * will be undefined;
  */
 export class HolderOrOperatorChangeData extends RegistrationBaseData {
-
     /** Effective Date of deregistration */
     effectiveDate: SimpleDate;
 }

@@ -56,7 +56,7 @@ export class CASAHolderOrOperatorChangeLoader {
 
                 entry.mark = 'VH-' + row[0];
                 entry.manufacturer = CASALoaderUtils.parseString(row[1]);
-                entry.model = CASALoaderUtils.parseString(row[2])
+                entry.model = CASALoaderUtils.parseString(row[2]);
                 entry.serialNumber = CASALoaderUtils.parseString(row[3]);
 
                 entry.effectiveDate = SimpleDate.parse(row[4]);

@@ -15,7 +15,6 @@ import { SimpleDate } from './simple-date';
  * registration as it doesn't care about engines etc.
  */
 export class MarkChangeData extends RegistrationBaseData {
-
     /** Effective Date of deregistration */
     effectiveDate: SimpleDate;
 

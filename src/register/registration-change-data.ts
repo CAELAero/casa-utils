@@ -15,7 +15,6 @@ import { SimpleDate } from './simple-date';
  * registration as it doesn't care about engines etc.
  */
 export class RegistrationChangeData extends RegistrationBaseData {
-
     /** True if this is a new registration, false if this is a return */
     isNewRegistration: boolean = false;
 

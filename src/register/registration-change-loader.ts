@@ -56,11 +56,11 @@ export class CASARegistrationChangeLoader {
 
                 entry.mark = 'VH-' + row[0];
                 entry.manufacturer = CASALoaderUtils.parseString(row[1]);
-                entry.model = CASALoaderUtils.parseString(row[2])
+                entry.model = CASALoaderUtils.parseString(row[2]);
                 entry.serialNumber = CASALoaderUtils.parseString(row[3]);
 
                 entry.effectiveDate = SimpleDate.parse(row[4]);
-                entry.isNewRegistration = row[5] === "ADD";
+                entry.isNewRegistration = row[5] === 'ADD';
 
                 const holder_postcode = row[11] ? row[11].toString().padStart(4, '0') : null;
                 const holder_add = Address.create2Line(
