@@ -15,6 +15,8 @@ import { RegistrationType } from './registration-type';
 /**
  * Internal reverse enum mapper since TS doesn't like using the string
  * value for lookups, so we abstract it away using reverse maps.
+ *
+ * @internal
  */
 export class EnumMapper {
     private reverseRegMap = new Map<string, RegistrationType>();

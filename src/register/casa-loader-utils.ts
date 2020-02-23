@@ -17,6 +17,8 @@ import { SimpleDate } from './simple-date';
  * Loader for the CASA aircraft register files. These are CSV files with the
  * column format defined here:
  * https://www.casa.gov.au/standard-page/data-files-field-definitions
+ *
+ * @internal
  */
 export class CASALoaderUtils {
     static parseString(src: string): string {
