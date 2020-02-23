@@ -70,7 +70,7 @@ export class CASAHolderOrOperatorChangeLoader {
                     holder_postcode,
                     CASALoaderUtils.parseString(row[11]),
                 );
-                let holder_date = SimpleDate.parse(row[20]);
+                const holder_date = SimpleDate.parse(row[20]);
 
                 entry.registeredHolder = OwnerData.create(row[5], holder_add, holder_date);
 
@@ -83,7 +83,7 @@ export class CASAHolderOrOperatorChangeLoader {
                     operator_postcode,
                     CASALoaderUtils.parseString(row[18]),
                 );
-                let operator_date = SimpleDate.parse(row[21]);
+                const operator_date = SimpleDate.parse(row[21]);
 
                 entry.registeredOperator = OwnerData.create(row[12], operator_add, operator_date);
 

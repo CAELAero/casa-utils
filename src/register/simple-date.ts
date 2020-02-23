@@ -36,7 +36,7 @@ export class SimpleDate {
     }
 
     public static parse(raw: string): SimpleDate {
-        if(!raw || raw.trim().length == 0) {
+        if(!raw || raw.trim().length === 0) {
             return undefined;
         }
 
