@@ -39,3 +39,21 @@ describe("Date parsing", () => {
         expect(result.year).toBe(1995);
     });
 });
+
+describe("Handles bad data", () => {
+    it("Generates undefined for undefined input", () => {
+        expect(SimpleDate.parse(undefined)).toBeUndefined();
+    });
+
+    it("Generates undefined for null input", () => {
+        expect(SimpleDate.parse(null)).toBeUndefined();
+    });
+
+    it("Generates undefined for zero length string input", () => {
+        expect(SimpleDate.parse("")).toBeUndefined();
+    });
+
+    it("Generates undefined for empty string input", () => {
+        expect(SimpleDate.parse("    ")).toBeUndefined();
+    });
+});
