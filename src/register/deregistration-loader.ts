@@ -55,8 +55,8 @@ export class CASADeregistrationLoader {
                 const entry = new DeregistrationData();
 
                 entry.mark = 'VH-' + row[0];
-                entry.manufacturer = row[1];
-                entry.model = row[2];
+                entry.manufacturer = CASALoaderUtils.parseString(row[1]);
+                entry.model = CASALoaderUtils.parseString(row[2])
                 entry.serialNumber = CASALoaderUtils.parseString(row[3]);
 
                 entry.effectiveDate = SimpleDate.parse(row[4]);

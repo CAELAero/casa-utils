@@ -56,13 +56,12 @@ export class CASARegistrationLoader {
                 const entry = new RegistrationData();
 
                 entry.mark = 'VH-' + row[0];
-                entry.manufacturer = row[1];
-                entry.manufacturerCountry = row[37];
+                entry.manufacturer = CASALoaderUtils.parseString(row[1]);
+                entry.manufacturerCountry = CASALoaderUtils.parseString(row[37]);
                 entry.manufactureYear = parseInt(row[38], 10) || 0;
 
-                entry.type = row[2];
-                entry.model = row[3];
-                entry.serialNumber = row[4].toString();
+                entry.model = CASALoaderUtils.parseString(row[3]);
+                entry.serialNumber = CASALoaderUtils.parseString(row[4]);
                 entry.mtow = parseInt(row[5], 10) || 0;
                 entry.engineCount = parseInt(row[6], 10) || 0;
 
