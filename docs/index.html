@@ -83,6 +83,7 @@
 					<li>Repository <a href="https://github.com/CAELAero/casa-utils">https://github.com/CAELAero/casa-utils</a></li>
 					<li>API Documentation: <a href="https://caelaero.github.io/casa-utils/">https://caelaero.github.io/casa-utils/</a></li>
 					<li>CASA Aircraft Register Data Files: <a href="https://www.casa.gov.au/aircraft/civil-aircraft-register/aircraft-register-data-files">https://www.casa.gov.au/aircraft/civil-aircraft-register/aircraft-register-data-files</a></li>
+					<li>CASA Aircraft Register Update Data Files: <a href="https://www.casa.gov.au/standard-page/update-data-files">https://www.casa.gov.au/standard-page/update-data-files</a></li>
 				</ul>
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h2>Installation</h2>
@@ -98,13 +99,47 @@ bower install @cael-aero/casa-utils --save</code></pre>
 				<a href="#typescript" id="typescript" style="color: inherit; text-decoration: none;">
 					<h3>TypeScript</h3>
 				</a>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { RegistrationData, CASARegisterLoader } <span class="hljs-keyword">from</span> <span class="hljs-string">'@cael-aero/casa-utils'</span>;
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { RegistrationData, CASARegistrationLoader } <span class="hljs-keyword">from</span> <span class="hljs-string">'@cael-aero/casa-utils'</span>;
 
-<span class="hljs-keyword">let</span> data:RegistrationData[] = CASARegisterLoader.listAllRegistrations(<span class="hljs-string">'somefile.xls'</span>);</code></pre>
+<span class="hljs-keyword">let</span> data:RegistrationData[] = CASARegistrationLoader.listAllRegistrations(<span class="hljs-string">'somefile.xls'</span>);</code></pre>
 				<a href="#api-examples" id="api-examples" style="color: inherit; text-decoration: none;">
 					<h2>API Examples</h2>
 				</a>
-				<p>TBD</p>
+				<a href="#read-registration-data" id="read-registration-data" style="color: inherit; text-decoration: none;">
+					<h3>Read Registration Data</h3>
+				</a>
+				<p>Download the complete registration data file from here: <a href="https://www.casa.gov.au/aircraft/civil-aircraft-register/aircraft-register-data-files">https://www.casa.gov.au/aircraft/civil-aircraft-register/aircraft-register-data-files</a></p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { RegistrationData, CASARegistrationLoader } <span class="hljs-keyword">from</span> <span class="hljs-string">'@cael-aero/casa-utils'</span>;
+
+<span class="hljs-keyword">let</span> data:RegistrationData[] = CASARegistrationLoader.listAllRegistrations(<span class="hljs-string">'aircraftreg_2020.xls'</span>);</code></pre>
+				<a href="#read-deregistration-data" id="read-deregistration-data" style="color: inherit; text-decoration: none;">
+					<h3>Read Deregistration Data</h3>
+				</a>
+				<p>Download the complete deregistation data file from here: <a href="https://www.casa.gov.au/standard-page/update-data-files">https://www.casa.gov.au/standard-page/update-data-files</a> </p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { DeregistrationData, CASADeregistrationLoader } <span class="hljs-keyword">from</span> <span class="hljs-string">'@cael-aero/casa-utils'</span>;
+
+<span class="hljs-keyword">let</span> data:DeregistrationData[] = CASADeregistrationLoader.listAllDeregistrations(<span class="hljs-string">'somefile.csv'</span>);</code></pre>
+				<a href="#read-new-and-returning-registration-data" id="read-new-and-returning-registration-data" style="color: inherit; text-decoration: none;">
+					<h3>Read New and Returning Registration data</h3>
+				</a>
+				<p>Download the complete adds and returns data file from here: <a href="https://www.casa.gov.au/standard-page/update-data-files">https://www.casa.gov.au/standard-page/update-data-files</a> </p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { RegistrationChangeData, CASARegistrationChangeLoader } <span class="hljs-keyword">from</span> <span class="hljs-string">'@cael-aero/casa-utils'</span>;
+
+<span class="hljs-keyword">let</span> data:RegistrationChangeData[] = CASARegistrationChangeLoader.listAllRegistrationChanges(<span class="hljs-string">'somefile.csv'</span>);</code></pre>
+				<a href="#read-rh-and-ro-changes" id="read-rh-and-ro-changes" style="color: inherit; text-decoration: none;">
+					<h3>Read RH and RO changes</h3>
+				</a>
+				<p>Download the complete registered holder or registered operation data file from here: <a href="https://www.casa.gov.au/standard-page/update-data-files">https://www.casa.gov.au/standard-page/update-data-files</a> </p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { HolderOrOperatorChangeData, CASAHolderOrOperatorChangeLoader } <span class="hljs-keyword">from</span> <span class="hljs-string">'@cael-aero/casa-utils'</span>;
+
+<span class="hljs-keyword">let</span> data:HolderOrOperatorChangeData[] = CASAHolderOrOperatorChangeLoader.listAllChanges(<span class="hljs-string">'somefile.csv'</span>);</code></pre>
+				<a href="#read-registration-mark-changes-to-the-register-data" id="read-registration-mark-changes-to-the-register-data" style="color: inherit; text-decoration: none;">
+					<h3>Read registration mark changes to the register data</h3>
+				</a>
+				<p>Download the complete registration mark data file from here: <a href="https://www.casa.gov.au/standard-page/update-data-files">https://www.casa.gov.au/standard-page/update-data-files</a> </p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { MarkChangeData, CASAMarkChangeLoader } <span class="hljs-keyword">from</span> <span class="hljs-string">'@cael-aero/casa-utils'</span>;
+
+<span class="hljs-keyword">let</span> data:MarkChangeData[] = CASAMarkChangeLoader.listAllMarkChanges(<span class="hljs-string">'somefile.csv'</span>);</code></pre>
 				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
 					<h2>License</h2>
 				</a>
@@ -153,10 +188,31 @@ bower install @cael-aero/casa-utils --save</code></pre>
 						<a href="modules/_fuel_type_.html">&quot;fuel-<wbr>type&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="modules/_holder_or_operator_change_data_.html">&quot;holder-<wbr>or-<wbr>operator-<wbr>change-<wbr>data&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_holder_or_operator_change_loader_.html">&quot;holder-<wbr>or-<wbr>operator-<wbr>change-<wbr>loader&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="modules/_landing_gear_type_.html">&quot;landing-<wbr>gear-<wbr>type&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="modules/_mark_change_data_.html">&quot;mark-<wbr>change-<wbr>data&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_mark_change_loader_.html">&quot;mark-<wbr>change-<wbr>loader&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="modules/_owner_data_.html">&quot;owner-<wbr>data&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_registration_base_data_.html">&quot;registration-<wbr>base-<wbr>data&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_registration_change_data_.html">&quot;registration-<wbr>change-<wbr>data&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_registration_change_loader_.html">&quot;registration-<wbr>change-<wbr>loader&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_registration_data_.html">&quot;registration-<wbr>data&quot;</a>

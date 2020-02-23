@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>OwnerData | @cael-aero/casa-utils</title>
+	<title>RegistrationChangeData | @cael-aero/casa-utils</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,24 +56,38 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_owner_data_.html">&quot;owner-data&quot;</a>
+					<a href="../modules/_registration_change_data_.html">&quot;registration-change-data&quot;</a>
 				</li>
 				<li>
-					<a href="_owner_data_.ownerdata.html">OwnerData</a>
+					<a href="_registration_change_data_.registrationchangedata.html">RegistrationChangeData</a>
 				</li>
 			</ul>
-			<h1>Class OwnerData</h1>
+			<h1>Class RegistrationChangeData</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Represents a change in registration of an aircraft - either an addition or
+							return to the register after being deregistered. A smaller subset of the basic
+						registration as it doesn&#39;t care about engines etc.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">OwnerData</span>
+						<a href="_registration_base_data_.registrationbasedata.html" class="tsd-signature-type">RegistrationBaseData</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">RegistrationChangeData</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -84,15 +98,14 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_owner_data_.ownerdata.html#address" class="tsd-kind-icon">address</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_owner_data_.ownerdata.html#commencementdate" class="tsd-kind-icon">commencement<wbr>Date</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_owner_data_.ownerdata.html#name" class="tsd-kind-icon">name</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Methods</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_owner_data_.ownerdata.html#create" class="tsd-kind-icon">create</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_registration_change_data_.registrationchangedata.html#effectivedate" class="tsd-kind-icon">effective<wbr>Date</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_registration_change_data_.registrationchangedata.html#isnewregistration" class="tsd-kind-icon">is<wbr>New<wbr>Registration</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_registration_change_data_.registrationchangedata.html#manufacturer" class="tsd-kind-icon">manufacturer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_registration_change_data_.registrationchangedata.html#mark" class="tsd-kind-icon">mark</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_registration_change_data_.registrationchangedata.html#model" class="tsd-kind-icon">model</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_registration_change_data_.registrationchangedata.html#registeredholder" class="tsd-kind-icon">registered<wbr>Holder</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_registration_change_data_.registrationchangedata.html#registeredoperator" class="tsd-kind-icon">registered<wbr>Operator</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_registration_change_data_.registrationchangedata.html#serialnumber" class="tsd-kind-icon">serial<wbr>Number</a></li>
 							</ul>
 						</section>
 					</div>
@@ -101,66 +114,132 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="address" class="tsd-anchor"></a>
-					<h3>address</h3>
-					<div class="tsd-signature tsd-kind-icon">address<span class="tsd-signature-symbol">:</span> <a href="_address_.address.html" class="tsd-signature-type">Address</a></div>
+					<a name="effectivedate" class="tsd-anchor"></a>
+					<h3>effective<wbr>Date</h3>
+					<div class="tsd-signature tsd-kind-icon">effective<wbr>Date<span class="tsd-signature-symbol">:</span> <a href="_simple_date_.simpledate.html" class="tsd-signature-type">SimpleDate</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/8e35c2a/src/register/owner-data.ts#L12">owner-data.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/8e35c2a/src/register/registration-change-data.ts#L22">registration-change-data.ts:22</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Effective Date of deregistration</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="commencementdate" class="tsd-anchor"></a>
-					<h3>commencement<wbr>Date</h3>
-					<div class="tsd-signature tsd-kind-icon">commencement<wbr>Date<span class="tsd-signature-symbol">:</span> <a href="_simple_date_.simpledate.html" class="tsd-signature-type">SimpleDate</a></div>
+					<a name="isnewregistration" class="tsd-anchor"></a>
+					<h3>is<wbr>New<wbr>Registration</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>New<wbr>Registration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/8e35c2a/src/register/owner-data.ts#L14">owner-data.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/8e35c2a/src/register/registration-change-data.ts#L19">registration-change-data.ts:19</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>True if this is a new registration, false if this is a return</p>
+						</div>
+					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="manufacturer" class="tsd-anchor"></a>
+					<h3>manufacturer</h3>
+					<div class="tsd-signature tsd-kind-icon">manufacturer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="_registration_base_data_.registrationbasedata.html">RegistrationBaseData</a>.<a href="_registration_base_data_.registrationbasedata.html#manufacturer">manufacturer</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/8e35c2a/src/register/owner-data.ts#L13">owner-data.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/8e35c2a/src/register/registration-base-data.ts#L19">registration-base-data.ts:19</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The name of the manufacturer of the airframe</p>
+						</div>
+					</div>
 				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="create" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> create</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, address<span class="tsd-signature-symbol">: </span><a href="_address_.address.html" class="tsd-signature-type">Address</a>, date<span class="tsd-signature-symbol">: </span><a href="_simple_date_.simpledate.html" class="tsd-signature-type">SimpleDate</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_owner_data_.ownerdata.html" class="tsd-signature-type">OwnerData</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/8e35c2a/src/register/owner-data.ts#L16">owner-data.ts:16</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>name: <span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li>
-									<h5>address: <a href="_address_.address.html" class="tsd-signature-type">Address</a></h5>
-								</li>
-								<li>
-									<h5>date: <a href="_simple_date_.simpledate.html" class="tsd-signature-type">SimpleDate</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_owner_data_.ownerdata.html" class="tsd-signature-type">OwnerData</a></h4>
-						</li>
-					</ul>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="mark" class="tsd-anchor"></a>
+					<h3>mark</h3>
+					<div class="tsd-signature tsd-kind-icon">mark<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_registration_base_data_.registrationbasedata.html">RegistrationBaseData</a>.<a href="_registration_base_data_.registrationbasedata.html#mark">mark</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/8e35c2a/src/register/registration-base-data.ts#L16">registration-base-data.ts:16</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The registration mark, including VH- prefix</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="model" class="tsd-anchor"></a>
+					<h3>model</h3>
+					<div class="tsd-signature tsd-kind-icon">model<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_registration_base_data_.registrationbasedata.html">RegistrationBaseData</a>.<a href="_registration_base_data_.registrationbasedata.html#model">model</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/8e35c2a/src/register/registration-base-data.ts#L22">registration-base-data.ts:22</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The official model name of the aircraft</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="registeredholder" class="tsd-anchor"></a>
+					<h3>registered<wbr>Holder</h3>
+					<div class="tsd-signature tsd-kind-icon">registered<wbr>Holder<span class="tsd-signature-symbol">:</span> <a href="_owner_data_.ownerdata.html" class="tsd-signature-type">OwnerData</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_registration_base_data_.registrationbasedata.html">RegistrationBaseData</a>.<a href="_registration_base_data_.registrationbasedata.html#registeredholder">registeredHolder</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/8e35c2a/src/register/registration-base-data.ts#L37">registration-base-data.ts:37</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Registered Holder details at the time of deregistration. Note that there will be no
+							commencement date for this change.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="registeredoperator" class="tsd-anchor"></a>
+					<h3>registered<wbr>Operator</h3>
+					<div class="tsd-signature tsd-kind-icon">registered<wbr>Operator<span class="tsd-signature-symbol">:</span> <a href="_owner_data_.ownerdata.html" class="tsd-signature-type">OwnerData</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_registration_base_data_.registrationbasedata.html">RegistrationBaseData</a>.<a href="_registration_base_data_.registrationbasedata.html#registeredoperator">registeredOperator</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/8e35c2a/src/register/registration-base-data.ts#L31">registration-base-data.ts:31</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Registered Operator details at the time of deregistration. Note that there will be no
+							commencement date for this change.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="serialnumber" class="tsd-anchor"></a>
+					<h3>serial<wbr>Number</h3>
+					<div class="tsd-signature tsd-kind-icon">serial<wbr>Number<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_registration_base_data_.registrationbasedata.html">RegistrationBaseData</a>.<a href="_registration_base_data_.registrationbasedata.html#serialnumber">serialNumber</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/CAELAero/casa-utils/blob/8e35c2a/src/register/registration-base-data.ts#L25">registration-base-data.ts:25</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The serial number of the airframe</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -215,13 +294,13 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_mark_change_loader_.html">&quot;mark-<wbr>change-<wbr>loader&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_owner_data_.html">&quot;owner-<wbr>data&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_registration_base_data_.html">&quot;registration-<wbr>base-<wbr>data&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_registration_change_data_.html">&quot;registration-<wbr>change-<wbr>data&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -246,19 +325,31 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_owner_data_.ownerdata.html" class="tsd-kind-icon">Owner<wbr>Data</a>
+						<a href="_registration_change_data_.registrationchangedata.html" class="tsd-kind-icon">Registration<wbr>Change<wbr>Data</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_owner_data_.ownerdata.html#address" class="tsd-kind-icon">address</a>
+								<a href="_registration_change_data_.registrationchangedata.html#effectivedate" class="tsd-kind-icon">effective<wbr>Date</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_owner_data_.ownerdata.html#commencementdate" class="tsd-kind-icon">commencement<wbr>Date</a>
+								<a href="_registration_change_data_.registrationchangedata.html#isnewregistration" class="tsd-kind-icon">is<wbr>New<wbr>Registration</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_owner_data_.ownerdata.html#name" class="tsd-kind-icon">name</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_registration_change_data_.registrationchangedata.html#manufacturer" class="tsd-kind-icon">manufacturer</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="_owner_data_.ownerdata.html#create" class="tsd-kind-icon">create</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_registration_change_data_.registrationchangedata.html#mark" class="tsd-kind-icon">mark</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_registration_change_data_.registrationchangedata.html#model" class="tsd-kind-icon">model</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_registration_change_data_.registrationchangedata.html#registeredholder" class="tsd-kind-icon">registered<wbr>Holder</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_registration_change_data_.registrationchangedata.html#registeredoperator" class="tsd-kind-icon">registered<wbr>Operator</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_registration_change_data_.registrationchangedata.html#serialnumber" class="tsd-kind-icon">serial<wbr>Number</a>
 							</li>
 						</ul>
 					</li>
