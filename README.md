@@ -61,12 +61,34 @@ import { DeregistrationData, CASADeregistrationLoader } from '@cael-aero/casa-ut
 let data:DeregistrationData[] = CASADeregistrationLoader.listAllDeregistrations('somefile.csv');
 ```
 
-### Read Adds and Returns to the register data
+### Read New and Returning Registration data
+
+Download the complete adds and returns data file from here: https://www.casa.gov.au/standard-page/update-data-files 
  
 ```typescript
 import { RegistrationChangeData, CASARegistrationChangeLoader } from '@cael-aero/casa-utils';
 
 let data:RegistrationChangeData[] = CASARegistrationChangeLoader.listAllRegistrationChanges('somefile.csv');
+```
+
+### Read RH and RO changes
+
+Download the complete registered holder or registered operation data file from here: https://www.casa.gov.au/standard-page/update-data-files 
+ 
+```typescript
+import { HolderOrOperatorChangeData, CASAHolderOrOperatorChangeLoader } from '@cael-aero/casa-utils';
+
+let data:HolderOrOperatorChangeData[] = CASAHolderOrOperatorChangeLoader.listAllChanges('somefile.csv');
+```
+
+### Read registration mark changes to the register data
+
+Download the complete registration mark data file from here: https://www.casa.gov.au/standard-page/update-data-files 
+ 
+```typescript
+import { MarkChangeData, CASAMarkChangeLoader } from '@cael-aero/casa-utils';
+
+let data:MarkChangeData[] = CASAMarkChangeLoader.listAllMarkChanges('somefile.csv');
 ```
 
 ## License
