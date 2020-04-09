@@ -30,8 +30,16 @@ export class CASALoaderUtils {
 
         if (excelDate) {
             const date_data = SSF.parse_date_code(excelDate);
+            // Adjust for daylight saving time processing when we are not currently in
+            // DST in real time running this code. It will parse the dates as 11pm the
+            // day before leaving the dates off by one.
+            //
+            // TODO: This will still have an error when it is on the month boundary
+            //  - it will have the previous month and one too many days for that month.
+            // Need a better solution here.
+            const dom = (date_data.H == 23) ? date_data.d + 1 : date_data.d;
 
-            retval = new SimpleDate(date_data.d, date_data.m, date_data.y);
+            retval = new SimpleDate(dom, date_data.m, date_data.y);
         }
 
         return retval;
