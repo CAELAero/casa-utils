@@ -41,7 +41,7 @@
     "lint": "tslint -p tsconfig.json",
     "docs": "typedoc --excludePrivate --excludeProtected --out docs src",
     "prepublishOnly": "npm test && npm run lint && npm run docs && git add docs/* && git commit -m \"Auto generated docs\" docs && git push",
-    "preversion": "npm run lint",
+    "preversion": "npm test && npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
