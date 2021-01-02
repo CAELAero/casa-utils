@@ -34,6 +34,8 @@ module.exports = {
         "@typescript-eslint"
     ],
     "rules": {
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/restrict-template-expressions": "off",
         "@typescript-eslint/adjacent-overload-signatures": "error",
         "@typescript-eslint/array-type": [
             "error",
@@ -110,6 +112,7 @@ module.exports = {
         ],
         "@typescript-eslint/type-annotation-spacing": "off",
         "@typescript-eslint/unified-signatures": "error",
+        "import/no-unresolved": "off",
         "arrow-parens": [
             "off",
             "always"
@@ -129,9 +132,6 @@ module.exports = {
         "guard-for-in": "error",
         "id-blacklist": "off",
         "id-match": "off",
-        "jsdoc/check-alignment": "error",
-        "jsdoc/check-indentation": "error",
-        "jsdoc/newline-after-description": "error",
         "linebreak-style": "off",
         "max-classes-per-file": [
             "error",
@@ -143,40 +143,7 @@ module.exports = {
         "no-bitwise": "error",
         "no-caller": "error",
         "no-cond-assign": "error",
-        "no-console": [
-            "off",
-            {
-                "allow": [
-                    "log",
-                    "debug",
-                    "info",
-                    "dirxml",
-                    "warn",
-                    "error",
-                    "dir",
-                    "time",
-                    "timeEnd",
-                    "timeLog",
-                    "trace",
-                    "assert",
-                    "clear",
-                    "count",
-                    "countReset",
-                    "group",
-                    "groupCollapsed",
-                    "groupEnd",
-                    "table",
-                    "Console",
-                    "markTimeline",
-                    "profile",
-                    "profileEnd",
-                    "timeline",
-                    "timelineEnd",
-                    "timeStamp",
-                    "context"
-                ]
-            }
-        ],
+        "no-console": "off",
         "no-debugger": "error",
         "no-empty": "error",
         "no-eval": "error",
@@ -186,12 +153,6 @@ module.exports = {
         "no-irregular-whitespace": "off",
         "no-multiple-empty-lines": "off",
         "no-new-wrappers": "error",
-        "no-shadow": [
-            "error",
-            {
-                "hoist": "all"
-            }
-        ],
         "no-throw-literal": "error",
         "no-trailing-spaces": "off",
         "no-undef-init": "error",
@@ -208,9 +169,6 @@ module.exports = {
         "prefer-const": "error",
         "quote-props": "off",
         "radix": "error",
-        "react/jsx-curly-spacing": "off",
-        "react/jsx-equals-spacing": "off",
-        "react/jsx-wrap-multilines": "off",
         "space-before-function-paren": "off",
         "space-in-parens": [
             "off",

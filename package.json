@@ -38,7 +38,7 @@
     "test": "jest --config jest.config.json",
     "coverage": "jest --coverage  && cat ./coverage/lcov.info | coveralls",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "./node_modules/.bin/ESLint -c .eslintrc.js",
+    "lint": "./node_modules/.bin/ESLint -c .eslintrc.js src",
     "docs": "typedoc --excludePrivate --excludeProtected --out docs src",
     "prepublishOnly": "npm test && npm run lint && npm run docs && git add docs/* && git commit -m \"Auto generated docs\" docs && git push",
     "preversion": "npm test && npm run lint",

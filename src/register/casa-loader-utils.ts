@@ -7,10 +7,8 @@
  */
 import { SSF } from 'xlsx';
 
-import { Address } from './address';
 import { CertificationCategoryType } from './certification-category-type';
 import { EnumMapper } from './enum-mapper';
-import { OwnerData } from './owner-data';
 import { SimpleDate } from './simple-date';
 
 /**
@@ -45,7 +43,7 @@ export class CASALoaderUtils {
         return retval;
     }
 
-    static parseCertCategories(mapper: EnumMapper, raw: string, fname: string): CertificationCategoryType[] {
+    static parseCertCategories(mapper: EnumMapper, raw: string): CertificationCategoryType[] {
         if (!raw) {
             return undefined;
         }

@@ -5,12 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { ParsingOptions, readFile, WorkBook, utils, SSF } from 'xlsx';
+import { readFile, WorkBook, utils } from 'xlsx';
 
 import { Address } from './address';
 import { CASALoaderUtils } from './casa-loader-utils';
 import { MarkChangeData } from './mark-change-data';
-import { EnumMapper } from './enum-mapper';
 import { OwnerData } from './owner-data';
 import { SimpleDate } from './simple-date';
 
@@ -54,15 +53,15 @@ export class CASAMarkChangeLoader {
             try {
                 const entry = new MarkChangeData();
 
-                entry.mark = 'VH-' + row[0];
+                entry.mark = 'VH-' + (row[0] as string);
                 entry.manufacturer = CASALoaderUtils.parseString(row[1]);
                 entry.model = CASALoaderUtils.parseString(row[2]);
                 entry.serialNumber = CASALoaderUtils.parseString(row[3]);
 
                 entry.effectiveDate = SimpleDate.parse(row[4]);
-                entry.oldMark = 'VH-' + row[5];
+                entry.oldMark = 'VH-' + (row[5] as string);
 
-                const holder_postcode = row[11] ? row[11].toString().padStart(4, '0') : null;
+                const holder_postcode = row[11] ? String(row[11]).padStart(4, '0') : null;
                 const holder_add = Address.create2Line(
                     CASALoaderUtils.parseString(row[7]),
                     CASALoaderUtils.parseString(row[8]),
@@ -74,7 +73,7 @@ export class CASAMarkChangeLoader {
 
                 entry.registeredHolder = OwnerData.create(row[6], holder_add, null);
 
-                const operator_postcode = row[18] ? row[18].toString().padStart(4, '0') : null;
+                const operator_postcode = row[18] ? String(row[18]).padStart(4, '0') : null;
                 const operator_add = Address.create2Line(
                     CASALoaderUtils.parseString(row[14]),
                     CASALoaderUtils.parseString(row[15]),
@@ -90,6 +89,7 @@ export class CASAMarkChangeLoader {
             } catch (error) {
                 // Should never get here since the above parsing is quite forgiving. Likely this is due
                 // to a stream or other interrupt error.
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 console.error(`Error reading row ${row} due to ${error.message}`, error);
             }
         });

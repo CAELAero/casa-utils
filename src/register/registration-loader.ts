@@ -5,16 +5,14 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { ParsingOptions, readFile, WorkBook, utils, SSF } from 'xlsx';
+import { readFile, WorkBook, utils } from 'xlsx';
 
 import { Address } from './address';
 import { CASALoaderUtils } from './casa-loader-utils';
-import { CertificationCategoryType } from './certification-category-type';
 import { EngineData } from './engine-data';
 import { EnumMapper } from './enum-mapper';
 import { OwnerData } from './owner-data';
 import { RegistrationData } from './registration-data';
-import { RegistrationType } from './registration-type';
 
 /**
  * Loader for the CASA aircraft register files. These are CSV files with the
@@ -55,7 +53,7 @@ export class CASARegistrationLoader {
             try {
                 const entry = new RegistrationData();
 
-                entry.mark = 'VH-' + row[0];
+                entry.mark = 'VH-' + (row[0] as string);
                 entry.manufacturer = CASALoaderUtils.parseString(row[1]);
                 entry.manufacturerCountry = CASALoaderUtils.parseString(row[37]);
                 entry.manufactureYear = parseInt(row[38], 10) || 0;
@@ -66,7 +64,7 @@ export class CASARegistrationLoader {
                 entry.engineCount = parseInt(row[6], 10) || 0;
 
                 if (entry.engineCount > 0) {
-                    const eng_data = EngineData.create(row[7], row[8], row[9].toString(), row[10]);
+                    const eng_data = EngineData.create(row[7], row[8], String(row[9]), row[10]);
                     entry.engine = eng_data;
                 }
 
@@ -80,19 +78,19 @@ export class CASARegistrationLoader {
                 entry.airframeType = enum_mapper.lookupAirframe(row[30]);
 
                 if (row[34] && row[34] !== 'AIRCRAFT NOT FITTED WITH PROPELLER') {
-                    entry.propellerManufacturer = row[34].toString().trim();
+                    entry.propellerManufacturer = String(row[34]).trim();
                 }
 
                 if (row[35] && row[35] !== 'NOT APPLICABLE') {
                     // ToString before trim here since we can occasionally get model numbers come through
                     // as just a plain number. The parser will treat that as a number. Trim() is then
                     // used in the case where we have a normal string, but with extra whitespace.
-                    entry.propellerModel = row[35].toString().trim();
+                    entry.propellerModel = String(row[35]).trim();
                 }
 
-                entry.typeCertificateNumber = row[36];
+                entry.typeCertificateNumber = String(row[36]);
 
-                const holder_postcode = row[17] ? row[17].toString().padStart(4, '0') : null;
+                const holder_postcode = row[17] ? String(row[17]).padStart(4, '0') : null;
                 const holder_add = Address.create2Line(
                     CASALoaderUtils.parseString(row[13]),
                     CASALoaderUtils.parseString(row[14]),
@@ -105,7 +103,7 @@ export class CASARegistrationLoader {
 
                 entry.registeredHolder = OwnerData.create(row[12], holder_add, holder_date);
 
-                const operator_postcode = row[25] ? row[25].toString().padStart(4, '0') : null;
+                const operator_postcode = row[25] ? String(row[25]).padStart(4, '0') : null;
                 const operator_add = Address.create2Line(
                     CASALoaderUtils.parseString(row[21]),
                     CASALoaderUtils.parseString(row[22]),
@@ -125,6 +123,7 @@ export class CASARegistrationLoader {
             } catch (error) {
                 // Should never get here since the above parsing is quite forgiving. Likely this is due
                 // to a stream or other interrupt error.
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 console.error(`Error reading row ${row} due to ${error.message}`, error);
             }
         });
