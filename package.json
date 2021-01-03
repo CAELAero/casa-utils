@@ -1,7 +1,7 @@
 {
   "name": "@cael-aero/casa-utils",
   "description": "Utilities for interacting with CASA Data",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "license": "BSD-3-Clause",
   "readme": "README.md",
   "author": "Justin Couch",
@@ -37,7 +37,7 @@
     "build": "tsc --build",
     "test": "jest --config jest.config.json",
     "coverage": "jest --coverage  && cat ./coverage/lcov.info | coveralls",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "format": "prettier --write \"src/**/*.ts\"",
     "lint": "./node_modules/.bin/ESLint -c .eslintrc.js src",
     "docs": "typedoc --excludePrivate --excludeProtected --out docs src",
     "prepublishOnly": "npm test && npm run lint && npm run docs && git add docs/* && git commit -m \"Auto generated docs\" docs && git push",
