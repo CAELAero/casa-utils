@@ -88,7 +88,7 @@ export class CASARegistrationLoader {
                     entry.propellerModel = String(row[35]).trim();
                 }
 
-                entry.typeCertificateNumber = (row[36] as string);
+                entry.typeCertificateNumber = row[36] as string;
 
                 const holder_postcode = row[17] ? String(row[17]).padStart(4, '0') : null;
                 const holder_add = Address.create2Line(
