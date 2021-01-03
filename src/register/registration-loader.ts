@@ -88,7 +88,7 @@ export class CASARegistrationLoader {
                     entry.propellerModel = String(row[35]).trim();
                 }
 
-                entry.typeCertificateNumber = String(row[36]);
+                entry.typeCertificateNumber = (row[36] as string);
 
                 const holder_postcode = row[17] ? String(row[17]).padStart(4, '0') : null;
                 const holder_add = Address.create2Line(
@@ -116,8 +116,8 @@ export class CASARegistrationLoader {
 
                 entry.registeredOperator = OwnerData.create(row[20], operator_add, operator_date);
 
-                entry.standardCoA = CASALoaderUtils.parseCertCategories(enum_mapper, row[31], source);
-                entry.specialCoA = CASALoaderUtils.parseCertCategories(enum_mapper, row[32], source);
+                entry.standardCoA = CASALoaderUtils.parseCertCategories(enum_mapper, row[31]);
+                entry.specialCoA = CASALoaderUtils.parseCertCategories(enum_mapper, row[32]);
 
                 retval.push(entry);
             } catch (error) {
