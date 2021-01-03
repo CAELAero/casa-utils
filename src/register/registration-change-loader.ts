@@ -49,7 +49,7 @@ export class CASARegistrationChangeLoader {
 
         const retval: RegistrationChangeData[] = [];
 
-        sheet_data.forEach(row => {
+        sheet_data.forEach((row) => {
             try {
                 const entry = new RegistrationChangeData();
 

@@ -49,7 +49,7 @@ export class CASAMarkChangeLoader {
 
         const retval: MarkChangeData[] = [];
 
-        sheet_data.forEach(row => {
+        sheet_data.forEach((row) => {
             try {
                 const entry = new MarkChangeData();
 

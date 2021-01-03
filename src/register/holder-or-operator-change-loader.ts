@@ -49,7 +49,7 @@ export class CASAHolderOrOperatorChangeLoader {
 
         const retval: HolderOrOperatorChangeData[] = [];
 
-        sheet_data.forEach(row => {
+        sheet_data.forEach((row) => {
             try {
                 const entry = new HolderOrOperatorChangeData();
 

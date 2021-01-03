@@ -49,7 +49,7 @@ export class CASARegistrationLoader {
         const retval: RegistrationData[] = [];
         const enum_mapper = new EnumMapper();
 
-        sheet_data.forEach(row => {
+        sheet_data.forEach((row) => {
             try {
                 const entry = new RegistrationData();
 

@@ -56,7 +56,7 @@ export class CASALoaderUtils {
             const bracket_data = raw.substring(8, raw.length - 1);
             const parts = bracket_data.split(';');
 
-            parts.forEach(t => {
+            parts.forEach((t) => {
                 retval.push(mapper.lookupCertificationCategory(t));
             });
         } else {

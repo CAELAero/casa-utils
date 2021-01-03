@@ -49,7 +49,7 @@ export class CASADeregistrationLoader {
 
         const retval: DeregistrationData[] = [];
 
-        sheet_data.forEach(row => {
+        sheet_data.forEach((row) => {
             try {
                 const entry = new DeregistrationData();
 
