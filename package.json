@@ -47,17 +47,17 @@
   },
   "dependencies": {
     "moment": "^2.29.1",
-    "xlsx": "^0.15.6"
+    "xlsx": "^0.16"
   },
   "devDependencies": {
-    "@types/jest": "^25.2.3",
+    "@types/jest": "^26.x",
     "@types/node": "^13.13.38",
-    "acorn": "^8.0.4",
-    "coveralls": "^3.1.0",
-    "jest": "^25.5.4",
+    "acorn": "^8.x",
+    "coveralls": "^3.1",
+    "jest": "^26.x",
     "minimist": ">=1.2.5",
     "prettier": "^1.19.1",
-    "ts-jest": "^25.5.1",
+    "ts-jest": "^26.x",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
     "eslint": "^7.17.0",
