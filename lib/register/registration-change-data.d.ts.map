@@ -1,1 +1,0 @@
-{"version":3,"file":"registration-change-data.d.ts","sourceRoot":"","sources":["../../src/register/registration-change-data.ts"],"names":[],"mappings":"AAOA,OAAO,EAAE,oBAAoB,EAAE,MAAM,0BAA0B,CAAC;AAEhE,OAAO,EAAE,UAAU,EAAE,MAAM,eAAe,CAAC;AAE3C;;;;GAIG;AACH,qBAAa,sBAAuB,SAAQ,oBAAoB;IAC5D,oEAAoE;IACpE,iBAAiB,EAAE,OAAO,CAAS;IAEnC,uCAAuC;IACvC,aAAa,EAAE,UAAU,CAAC;CAC7B"}

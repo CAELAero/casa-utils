@@ -1,1 +1,0 @@
-{"version":3,"file":"mark-change-data.d.ts","sourceRoot":"","sources":["../../src/register/mark-change-data.ts"],"names":[],"mappings":"AAOA,OAAO,EAAE,oBAAoB,EAAE,MAAM,0BAA0B,CAAC;AAEhE,OAAO,EAAE,UAAU,EAAE,MAAM,eAAe,CAAC;AAE3C;;;;GAIG;AACH,qBAAa,cAAe,SAAQ,oBAAoB;IACpD,uCAAuC;IACvC,aAAa,EAAE,UAAU,CAAC;IAE1B,wEAAwE;IACxE,OAAO,EAAE,MAAM,CAAC;CACnB"}
