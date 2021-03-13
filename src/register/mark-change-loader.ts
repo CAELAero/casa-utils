@@ -28,7 +28,9 @@ export class CASAMarkChangeLoader {
      * @return The entries found in the file, as parsed. If nothing is found, returns
      *   a zero length array
      */
-    public static async listAllMarkChanges(source: string | Readable | ReadableStream | Blob): Promise<MarkChangeData[]> {
+    public static async listAllMarkChanges(
+        source: string | Readable | ReadableStream | Blob,
+    ): Promise<MarkChangeData[]> {
         if (!source) {
             throw new Error('No source given to parse');
         }

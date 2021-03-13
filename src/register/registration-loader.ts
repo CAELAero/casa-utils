@@ -29,7 +29,9 @@ export class CASARegistrationLoader {
      * @return The entries found in the file, as parsed. If nothing is found, returns
      *   a zero length array
      */
-    public static async listAllRegistrations(source: string | Readable | ReadableStream | Blob): Promise<RegistrationData[]> {
+    public static async listAllRegistrations(
+        source: string | Readable | ReadableStream | Blob,
+    ): Promise<RegistrationData[]> {
         if (!source) {
             throw new Error('No source given to parse');
         }

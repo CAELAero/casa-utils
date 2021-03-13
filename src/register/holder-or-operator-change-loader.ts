@@ -28,7 +28,9 @@ export class CASAHolderOrOperatorChangeLoader {
      * @return The entries found in the file, as parsed. If nothing is found, returns
      *   a zero length array
      */
-    public static async listAllChanges(source: string | Readable | ReadableStream | Blob): Promise<HolderOrOperatorChangeData[]> {
+    public static async listAllChanges(
+        source: string | Readable | ReadableStream | Blob,
+    ): Promise<HolderOrOperatorChangeData[]> {
         if (!source) {
             throw new Error('No source given to parse');
         }

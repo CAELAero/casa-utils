@@ -28,7 +28,9 @@ export class CASARegistrationChangeLoader {
      * @return The entries found in the file, as parsed. If nothing is found, returns
      *   a zero length array
      */
-    public static async listAllRegistrationChanges(source: string | Readable | ReadableStream | Blob): Promise<RegistrationChangeData[]> {
+    public static async listAllRegistrationChanges(
+        source: string | Readable | ReadableStream | Blob,
+    ): Promise<RegistrationChangeData[]> {
         if (!source) {
             throw new Error('No source given to parse');
         }

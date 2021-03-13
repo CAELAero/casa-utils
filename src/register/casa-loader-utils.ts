@@ -68,12 +68,15 @@ export class CASALoaderUtils {
         return retval;
     }
 
-    static async readInput(source: string | Readable | ReadableStream | Blob, isExcel: boolean = false): Promise<WorkBook> {
+    static async readInput(
+        source: string | Readable | ReadableStream | Blob,
+        isExcel: boolean = false,
+    ): Promise<WorkBook> {
         // Need to force raw parsing here since it will mess up the registration dates,
         // which are in internation style dd/mm/yyyy and it converts to american style.
         const options: ParsingOptions = {};
 
-        if(isExcel) {
+        if (isExcel) {
             options.cellDates = false;
         } else {
             options.raw = true;

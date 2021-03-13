@@ -28,7 +28,9 @@ export class CASADeregistrationLoader {
      * @return The entries found in the file, as parsed. If nothing is found, returns
      *   a zero length array
      */
-    public static async listAllDeregistrations(source: string | Readable | ReadableStream | Blob): Promise<DeregistrationData[]> {
+    public static async listAllDeregistrations(
+        source: string | Readable | ReadableStream | Blob,
+    ): Promise<DeregistrationData[]> {
         if (!source) {
             throw new Error('No source given to parse');
         }
