@@ -5,7 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { readFile, WorkBook, utils } from 'xlsx';
+import { Readable } from 'stream';
+
+import { WorkBook, utils } from 'xlsx';
 
 import { Address } from './address';
 import { CASALoaderUtils } from './casa-loader-utils';
@@ -27,16 +29,12 @@ export class CASARegistrationLoader {
      * @return The entries found in the file, as parsed. If nothing is found, returns
      *   a zero length array
      */
-    public static listAllRegistrations(source: string): RegistrationData[] {
+    public static async listAllRegistrations(source: string | Readable | ReadableStream | Blob): Promise<RegistrationData[]> {
         if (!source) {
             throw new Error('No source given to parse');
         }
 
-        const options = {
-            cellDates: false,
-        };
-
-        const workbook: WorkBook = readFile(source, options);
+        const workbook: WorkBook = await CASALoaderUtils.readInput(source, true);
         const loaded_data = workbook.Sheets[workbook.SheetNames[0]];
 
         // Could we find the data? undefined or null here if not. Throw error

@@ -10,25 +10,37 @@ import { HolderOrOperatorChangeData } from '../../src/register/holder-or-operato
 import { SimpleDate } from '../../src/register/simple-date';
 
 describe('Erroneous input handling', () => {
-    it('generates an error if no file given', () => {
-        expect(() => { CASAHolderOrOperatorChangeLoader.listAllChanges(null); }).toThrow();
+    it('generates an error if no file given', async () => {
+        expect.assertions(1);
+
+        try {
+            await CASAHolderOrOperatorChangeLoader.listAllChanges(null);
+        } catch(err) {
+            expect(err).not.toBeNull();
+        }
     });
 
-    it('generates an error if file does not exist', () => {
-        expect(() => { CASAHolderOrOperatorChangeLoader.listAllChanges("randompath.xls"); }).toThrowError();
+    it('generates an error if file does not exist', async () => {
+        expect.assertions(1);
+
+        try {
+            await CASAHolderOrOperatorChangeLoader.listAllChanges("randompath.xls");
+        } catch(err) {
+            expect(err).not.toBeNull();
+        }
     });
 });
 
 describe("Loads correct data", () => {
-    it('Handles an empty file', () => {
-        let result:HolderOrOperatorChangeData[] = CASAHolderOrOperatorChangeLoader.listAllChanges("tests/register/data/holder_or_operator_change/empty_data.csv");
+    it('Handles an empty file', async () => {
+        let result:HolderOrOperatorChangeData[] = await CASAHolderOrOperatorChangeLoader.listAllChanges("tests/register/data/holder_or_operator_change/empty_data.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(0);
     });
 
-    it("Handles a single row of correct data", () => {
-        let result:HolderOrOperatorChangeData[] = CASAHolderOrOperatorChangeLoader.listAllChanges("tests/register/data/holder_or_operator_change/single_row_basic.csv");
+    it("Handles a single row of correct data", async () => {
+        let result:HolderOrOperatorChangeData[] = await CASAHolderOrOperatorChangeLoader.listAllChanges("tests/register/data/holder_or_operator_change/single_row_basic.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -64,8 +76,8 @@ describe("Loads correct data", () => {
         expect(entry.registeredOperator.commencementDate).toEqual(new SimpleDate(13,3,2009));
     });
 
-    it("Handles a multiple holder_or_operator_change of the same mark", () => {
-        let result:HolderOrOperatorChangeData[] = CASAHolderOrOperatorChangeLoader.listAllChanges("tests/register/data/holder_or_operator_change/multi_row_same_mark.csv");
+    it("Handles a multiple holder_or_operator_change of the same mark", async () => {
+        let result:HolderOrOperatorChangeData[] = await CASAHolderOrOperatorChangeLoader.listAllChanges("tests/register/data/holder_or_operator_change/multi_row_same_mark.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(2);
@@ -85,8 +97,8 @@ describe("Loads correct data", () => {
 });
 
 describe("Handles bad data", () => {
-    it("Foreign addresses miss data", () => {
-        let result:HolderOrOperatorChangeData[] = CASAHolderOrOperatorChangeLoader.listAllChanges("tests/register/data/holder_or_operator_change/single_row_foreign_address.csv");
+    it("Foreign addresses miss data", async () => {
+        let result:HolderOrOperatorChangeData[] = await CASAHolderOrOperatorChangeLoader.listAllChanges("tests/register/data/holder_or_operator_change/single_row_foreign_address.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -121,8 +133,8 @@ describe("Handles bad data", () => {
         expect(entry.registeredOperator.address.country).toBeFalsy();
     });
 
-    it("No addresses provided error", () => {
-        let result:HolderOrOperatorChangeData[] = CASAHolderOrOperatorChangeLoader.listAllChanges("tests/register/data/holder_or_operator_change/single_row_missing_address.csv");
+    it("No addresses provided error", async () => {
+        let result:HolderOrOperatorChangeData[] = await CASAHolderOrOperatorChangeLoader.listAllChanges("tests/register/data/holder_or_operator_change/single_row_missing_address.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -155,8 +167,8 @@ describe("Handles bad data", () => {
 
 /** Normally skipped so that we don't take forever on the tests and this doesn't add any value */
 describe.skip("Load full file", () => {
-    it("Can load the whole dataset ", () => {
-        let result:HolderOrOperatorChangeData[] = CASAHolderOrOperatorChangeLoader.listAllChanges("tests/register/data/holder_or_operator_change/rhro_change_since_2000.csv");
+    it("Can load the whole dataset ", async () => {
+        let result:HolderOrOperatorChangeData[] = await CASAHolderOrOperatorChangeLoader.listAllChanges("tests/register/data/holder_or_operator_change/rhro_change_since_2000.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(28128);

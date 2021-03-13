@@ -3,7 +3,6 @@
  */
 export { Address } from './register/address';
 export { AirframeType } from './register/airframe-type';
-export { CASALoaderUtils } from './register/casa-loader-utils';
 export { CertificationCategoryType } from './register/certification-category-type';
 export { DeregistrationData } from './register/deregistration-data';
 export { CASADeregistrationLoader } from './register/deregistration-loader';

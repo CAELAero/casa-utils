@@ -5,7 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { SSF } from 'xlsx';
+import { Readable } from 'stream';
+
+import { ParsingOptions, readFile, read, SSF, WorkBook, utils } from 'xlsx';
 
 import { CertificationCategoryType } from './certification-category-type';
 import { EnumMapper } from './enum-mapper';
@@ -64,5 +66,50 @@ export class CASALoaderUtils {
         }
 
         return retval;
+    }
+
+    static async readInput(source: string | Readable | ReadableStream | Blob, isExcel: boolean = false): Promise<WorkBook> {
+        // Need to force raw parsing here since it will mess up the registration dates,
+        // which are in internation style dd/mm/yyyy and it converts to american style.
+        const options: ParsingOptions = {};
+
+        if(isExcel) {
+            options.cellDates = false;
+        } else {
+            options.raw = true;
+        }
+
+        if (typeof source === 'string') {
+            return readFile(source, options);
+        } else if (source instanceof Readable) {
+            // ReadableStream is a derived type of Readable, so we're good here
+            return CASALoaderUtils.readStream(source, options);
+        } else if (source instanceof ReadableStream) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const readable = new Readable().wrap(source as any);
+            return CASALoaderUtils.readStream(readable, options);
+        } else if (source instanceof Blob) {
+            const blob_stream = source.stream();
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const readable = new Readable().wrap(blob_stream as any);
+            return CASALoaderUtils.readStream(readable, options);
+        } else {
+            throw new Error('Unhandled type of input source');
+        }
+    }
+
+    private static async readStream(stream: Readable, options: ParsingOptions): Promise<WorkBook> {
+        const buffers: Uint8Array[] = [];
+        options.type = 'buffer';
+
+        const reader = new Promise<WorkBook>((resolve, reject) => {
+            stream.on('data', (data) => {
+                buffers.push(data);
+            });
+            stream.on('end', () => resolve(read(Buffer.concat(buffers), options)));
+            stream.on('error', reject);
+        });
+
+        return reader;
     }
 }

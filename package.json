@@ -30,7 +30,7 @@
     "url": "git+https://github.com/CAELAero/casa-utils"
   },
   "publishConfig": {
-    "cache": "~/.npm",
+    "cache": ".npm",
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@types/jest": "^26.x",
-    "@types/node": "^13.13.38",
+    "@types/node": "^14.x",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
     "acorn": "^8.x",

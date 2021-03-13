@@ -10,25 +10,37 @@ import { MarkChangeData } from '../../src/register/mark-change-data';
 import { SimpleDate } from '../../src/register/simple-date';
 
 describe('Erroneous input handling', () => {
-    it('generates an error if no file given', () => {
-        expect(() => { CASAMarkChangeLoader.listAllMarkChanges(null); }).toThrow();
+    it('generates an error if no file given', async () => {
+        expect.assertions(1);
+
+        try {
+            await CASAMarkChangeLoader.listAllMarkChanges(null);
+        } catch(err) {
+            expect(err).not.toBeNull();
+        }
     });
 
-    it('generates an error if file does not exist', () => {
-        expect(() => { CASAMarkChangeLoader.listAllMarkChanges("randompath.xls"); }).toThrowError();
+    it('generates an error if file does not exist', async () => {
+        expect.assertions(1);
+
+        try {
+            await CASAMarkChangeLoader.listAllMarkChanges("randompath.xls");
+        } catch(err) {
+            expect(err).not.toBeNull();
+        }
     });
 });
 
 describe("Loads correct data", () => {
-    it('Handles an empty file', () => {
-        let result:MarkChangeData[] = CASAMarkChangeLoader.listAllMarkChanges("tests/register/data/mark_change/empty_data.csv");
+    it('Handles an empty file', async () => {
+        let result:MarkChangeData[] = await CASAMarkChangeLoader.listAllMarkChanges("tests/register/data/mark_change/empty_data.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(0);
     });
 
-    it("Handles a single row of correct data", () => {
-        let result:MarkChangeData[] = CASAMarkChangeLoader.listAllMarkChanges("tests/register/data/mark_change/single_row_basic.csv");
+    it("Handles a single row of correct data", async () => {
+        let result:MarkChangeData[] = await CASAMarkChangeLoader.listAllMarkChanges("tests/register/data/mark_change/single_row_basic.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -65,8 +77,8 @@ describe("Loads correct data", () => {
         expect(entry.registeredOperator.commencementDate).toBeFalsy();
     });
 
-    it("Handles a multiple mark_change of the same mark", () => {
-        let result:MarkChangeData[] = CASAMarkChangeLoader.listAllMarkChanges("tests/register/data/mark_change/multi_row_same_mark.csv");
+    it("Handles a multiple mark_change of the same mark", async () => {
+        let result:MarkChangeData[] = await CASAMarkChangeLoader.listAllMarkChanges("tests/register/data/mark_change/multi_row_same_mark.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(2);
@@ -88,8 +100,8 @@ describe("Loads correct data", () => {
 });
 
 describe("Handles bad data", () => {
-    it("Foreign addresses miss data", () => {
-        let result:MarkChangeData[] = CASAMarkChangeLoader.listAllMarkChanges("tests/register/data/mark_change/single_row_foreign_address.csv");
+    it("Foreign addresses miss data", async () => {
+        let result:MarkChangeData[] = await CASAMarkChangeLoader.listAllMarkChanges("tests/register/data/mark_change/single_row_foreign_address.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -125,8 +137,8 @@ describe("Handles bad data", () => {
         expect(entry.registeredOperator.address.country).toBeFalsy();
     });
 
-    it("No addresses provided error", () => {
-        let result:MarkChangeData[] = CASAMarkChangeLoader.listAllMarkChanges("tests/register/data/mark_change/single_row_missing_address.csv");
+    it("No addresses provided error", async () => {
+        let result:MarkChangeData[] = await CASAMarkChangeLoader.listAllMarkChanges("tests/register/data/mark_change/single_row_missing_address.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -160,8 +172,8 @@ describe("Handles bad data", () => {
 
 /** Normally skipped so that we don't take forever on the tests and this doesn't add any value */
 describe.skip("Load full file", () => {
-    it("Can load the whole dataset ", () => {
-        let result:MarkChangeData[] = CASAMarkChangeLoader.listAllMarkChanges("tests/register/data/mark_change/change_of_marks_since_2000.csv");
+    it("Can load the whole dataset ", async () => {
+        let result:MarkChangeData[] = await CASAMarkChangeLoader.listAllMarkChanges("tests/register/data/mark_change/change_of_marks_since_2000.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1444);

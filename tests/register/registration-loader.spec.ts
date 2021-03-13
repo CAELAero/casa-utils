@@ -16,25 +16,37 @@ import { RegistrationType } from '../../src/register/registration-type';
 import { SimpleDate } from '../../src/register/simple-date';
 
 describe('Erroneous input handling', () => {
-    it('generates an error if no file given', () => {
-        expect(() => { CASARegistrationLoader.listAllRegistrations(null); }).toThrow();
+    it('generates an error if no file given', async () => {
+        expect.assertions(1);
+
+        try {
+            await CASARegistrationLoader.listAllRegistrations(null);
+        } catch(err) {
+            expect(err).not.toBeNull();
+        }
     });
 
-    it('generates an error if file does not exist', () => {
-        expect(() => { CASARegistrationLoader.listAllRegistrations("randompath.xls"); }).toThrowError();
+    it('generates an error if file does not exist', async () => {
+        expect.assertions(1);
+
+        try {
+            await CASARegistrationLoader.listAllRegistrations("randompath.xls");
+        } catch(err) {
+            expect(err).not.toBeNull();
+        }
     });
 });
 
 describe("Loads correct data", () => {
-    it('Handles an empty file', () => {
-        let result:RegistrationData[] = CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/empty_data.csv");
+    it('Handles an empty file', async () => {
+        let result:RegistrationData[] = await CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/empty_data.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(0);
     });
 
-    it("Handles a single row of correct data", () => {
-        let result:RegistrationData[] = CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_current_registration.csv");
+    it("Handles a single row of correct data", async () => {
+        let result:RegistrationData[] = await CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_current_registration.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -98,8 +110,8 @@ describe("Loads correct data", () => {
         expect(entry.specialCoA).toBeFalsy();
     });
 
-    it("Handles a single non-powered glider", () => {
-        let result:RegistrationData[] = CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_glider_registration.csv");
+    it("Handles a single non-powered glider", async () => {
+        let result:RegistrationData[] = await CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_glider_registration.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -156,8 +168,8 @@ describe("Loads correct data", () => {
         expect(entry.specialCoA).toBeFalsy();
     });
 
-    it("Handles a single sustainer glider", () => {
-        let result:RegistrationData[] = CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_sustainer_glider.csv");
+    it("Handles a single sustainer glider", async () => {
+        let result:RegistrationData[] = await CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_sustainer_glider.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -219,8 +231,8 @@ describe("Loads correct data", () => {
         expect(entry.specialCoA).toBeFalsy();
     });
 
-    it("Handles a single helicopter", () => {
-        let result:RegistrationData[] = CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_helicopter.csv");
+    it("Handles a single helicopter", async () => {
+        let result:RegistrationData[] = await CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_helicopter.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -283,8 +295,8 @@ describe("Loads correct data", () => {
         expect(entry.specialCoA).toBeFalsy();
     });
 
-    it("Handles a single balloon", () => {
-        let result:RegistrationData[] = CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_balloon.csv");
+    it("Handles a single balloon", async () => {
+        let result:RegistrationData[] = await CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_balloon.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -343,8 +355,8 @@ describe("Loads correct data", () => {
         expect(entry.specialCoA).toBeFalsy();
     });
 
-    it("Expired CoA", () => {
-        let result:RegistrationData[] = CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_expired_coa.csv");
+    it("Expired CoA", async () => {
+        let result:RegistrationData[] = await CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_expired_coa.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -358,8 +370,8 @@ describe("Loads correct data", () => {
         expect(result[0].specialCoA).toEqual(expect.arrayContaining([CertificationCategoryType.EXPIRED]));
     });
 
-    it("Draft CoA", () => {
-        let result:RegistrationData[] = CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_draft_coa.csv");
+    it("Draft CoA", async () => {
+        let result:RegistrationData[] = await CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_draft_coa.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -375,8 +387,8 @@ describe("Loads correct data", () => {
 });
 
 describe("Handles bad data", () => {
-    it("No postcode in foreign countries", () => {
-        let result:RegistrationData[] = CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_foreign_address_no_postcode.csv");
+    it("No postcode in foreign countries", async () => {
+        let result:RegistrationData[] = await CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_foreign_address_no_postcode.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -439,8 +451,8 @@ describe("Handles bad data", () => {
         expect(entry.specialCoA).toBeFalsy();
     });
 
-    it("Skips errors as the default behaviour", () => {
-        let result:RegistrationData[] = CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/multi_row_with_error.csv");
+    it("Skips errors as the default behaviour", async () => {
+        let result:RegistrationData[] = await CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/multi_row_with_error.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(2);
@@ -451,8 +463,8 @@ describe("Handles bad data", () => {
         expect(result[0].mark).toBe("VH-DGI");
     });
 
-    it("Numerical propeller model", () => {
-        let result:RegistrationData[] = CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_numerical_prop_model.csv");
+    it("Numerical propeller model", async () => {
+        let result:RegistrationData[] = await CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_numerical_prop_model.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -462,8 +474,8 @@ describe("Handles bad data", () => {
         expect(result[0].propellerModel).toBe("283");
     });
 
-    it("No suburb error", () => {
-        let result:RegistrationData[] = CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_no_state.csv");
+    it("No suburb error", async () => {
+        let result:RegistrationData[] = await CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/single_row_no_state.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -482,8 +494,8 @@ describe("Handles bad data", () => {
 
 /** Normally skipped so that we don't take forever on the tests and this doesn't add any value */
 describe.skip("Load full file", () => {
-    it("Can load the whole 2019 dataset ", () => {
-        let result:RegistrationData[] = CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/acrftreg_2019.csv");
+    it("Can load the whole 2019 dataset ", async () => {
+        let result:RegistrationData[] = await CASARegistrationLoader.listAllRegistrations("tests/register/data/current_register/acrftreg_2019.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(15685);

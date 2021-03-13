@@ -10,25 +10,37 @@ import { RegistrationChangeData } from '../../src/register/registration-change-d
 import { SimpleDate } from '../../src/register/simple-date';
 
 describe('Erroneous input handling', () => {
-    it('generates an error if no file given', () => {
-        expect(() => { CASARegistrationChangeLoader.listAllRegistrationChanges(null); }).toThrow();
+    it('generates an error if no file given', async () => {
+        expect.assertions(1);
+
+        try {
+            await CASARegistrationChangeLoader.listAllRegistrationChanges(null);
+        } catch(err) {
+            expect(err).not.toBeNull();
+        }
     });
 
-    it('generates an error if file does not exist', () => {
-        expect(() => { CASARegistrationChangeLoader.listAllRegistrationChanges("randompath.xls"); }).toThrowError();
+    it('generates an error if file does not exist', async () => {
+        expect.assertions(1);
+
+        try {
+            await CASARegistrationChangeLoader.listAllRegistrationChanges("randompath.xls");
+        } catch(err) {
+            expect(err).not.toBeNull();
+        }
     });
 });
 
 describe("Loads correct data", () => {
-    it('Handles an empty file', () => {
-        let result:RegistrationChangeData[] = CASARegistrationChangeLoader.listAllRegistrationChanges("tests/register/data/adds_and_returns/empty_data.csv");
+    it('Handles an empty file', async () => {
+        let result:RegistrationChangeData[] = await CASARegistrationChangeLoader.listAllRegistrationChanges("tests/register/data/adds_and_returns/empty_data.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(0);
     });
 
-    it("Handles a single row of correct adding a registration", () => {
-        let result:RegistrationChangeData[] = CASARegistrationChangeLoader.listAllRegistrationChanges("tests/register/data/adds_and_returns/single_row_basic_add.csv");
+    it("Handles a single row of correct adding a registration", async () => {
+        let result:RegistrationChangeData[] = await CASARegistrationChangeLoader.listAllRegistrationChanges("tests/register/data/adds_and_returns/single_row_basic_add.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -65,8 +77,8 @@ describe("Loads correct data", () => {
         expect(entry.registeredOperator.commencementDate).toBeFalsy();
     });
 
-    it("Handles a single row of correct returning registration", () => {
-        let result:RegistrationChangeData[] = CASARegistrationChangeLoader.listAllRegistrationChanges("tests/register/data/adds_and_returns/single_row_basic_return.csv");
+    it("Handles a single row of correct returning registration", async () => {
+        let result:RegistrationChangeData[] = await CASARegistrationChangeLoader.listAllRegistrationChanges("tests/register/data/adds_and_returns/single_row_basic_return.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -103,8 +115,8 @@ describe("Loads correct data", () => {
         expect(entry.registeredOperator.commencementDate).toBeFalsy();
     });
 
-    it("Handles a multiple adds_and_returns of the same mark", () => {
-        let result:RegistrationChangeData[] = CASARegistrationChangeLoader.listAllRegistrationChanges("tests/register/data/adds_and_returns/multi_row_same_mark.csv");
+    it("Handles a multiple adds_and_returns of the same mark", async () => {
+        let result:RegistrationChangeData[] = await CASARegistrationChangeLoader.listAllRegistrationChanges("tests/register/data/adds_and_returns/multi_row_same_mark.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(2);
@@ -126,8 +138,8 @@ describe("Loads correct data", () => {
 });
 
 describe("Handles bad data", () => {
-    it("Foreign addresses miss data", () => {
-        let result:RegistrationChangeData[] = CASARegistrationChangeLoader.listAllRegistrationChanges("tests/register/data/adds_and_returns/single_row_foreign_address.csv");
+    it("Foreign addresses miss data", async () => {
+        let result:RegistrationChangeData[] = await CASARegistrationChangeLoader.listAllRegistrationChanges("tests/register/data/adds_and_returns/single_row_foreign_address.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -164,8 +176,8 @@ describe("Handles bad data", () => {
         expect(entry.registeredOperator.commencementDate).toBeFalsy();
     });
 
-    it("No addresses provided error", () => {
-        let result:RegistrationChangeData[] = CASARegistrationChangeLoader.listAllRegistrationChanges("tests/register/data/adds_and_returns/single_row_missing_address.csv");
+    it("No addresses provided error", async () => {
+        let result:RegistrationChangeData[] = await CASARegistrationChangeLoader.listAllRegistrationChanges("tests/register/data/adds_and_returns/single_row_missing_address.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -198,8 +210,8 @@ describe("Handles bad data", () => {
 
 /** Normally skipped so that we don't take forever on the tests and this doesn't add any value */
 describe.skip("Load full file", () => {
-    it("Can load the whole dataset ", () => {
-        let result:RegistrationChangeData[] = CASARegistrationChangeLoader.listAllRegistrationChanges("tests/register/data/adds_and_returns/add_and_return_since_2000.csv");
+    it("Can load the whole dataset ", async () => {
+        let result:RegistrationChangeData[] = await CASARegistrationChangeLoader.listAllRegistrationChanges("tests/register/data/adds_and_returns/add_and_return_since_2000.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(10033);

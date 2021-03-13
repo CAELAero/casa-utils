@@ -5,7 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { readFile, WorkBook, utils } from 'xlsx';
+import { Readable } from 'stream';
+
+import { WorkBook, utils } from 'xlsx';
 
 import { Address } from './address';
 import { CASALoaderUtils } from './casa-loader-utils';
@@ -26,18 +28,12 @@ export class CASAMarkChangeLoader {
      * @return The entries found in the file, as parsed. If nothing is found, returns
      *   a zero length array
      */
-    public static listAllMarkChanges(source: string): MarkChangeData[] {
+    public static async listAllMarkChanges(source: string | Readable | ReadableStream | Blob): Promise<MarkChangeData[]> {
         if (!source) {
             throw new Error('No source given to parse');
         }
 
-        // Need to force raw parsing here since it will mess up the registration dates,
-        // which are in internation style dd/mm/yyyy and it converts to american style.
-        const options = {
-            raw: true,
-        };
-
-        const workbook: WorkBook = readFile(source, options);
+        const workbook: WorkBook = await CASALoaderUtils.readInput(source);
         const loaded_data = workbook.Sheets[workbook.SheetNames[0]];
 
         // Could we find the data? undefined or null here if not. Throw error

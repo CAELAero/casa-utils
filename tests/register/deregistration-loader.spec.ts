@@ -10,25 +10,37 @@ import { DeregistrationData } from '../../src/register/deregistration-data';
 import { SimpleDate } from '../../src/register/simple-date';
 
 describe('Erroneous input handling', () => {
-    it('generates an error if no file given', () => {
-        expect(() => { CASADeregistrationLoader.listAllDeregistrations(null); }).toThrow();
+    it('generates an error if no file given', async () => {
+        expect.assertions(1);
+
+        try {
+            await CASADeregistrationLoader.listAllDeregistrations(null);
+        } catch(err) {
+            expect(err).not.toBeNull();
+        }
     });
 
-    it('generates an error if file does not exist', () => {
-        expect(() => { CASADeregistrationLoader.listAllDeregistrations("randompath.xls"); }).toThrowError();
+    it('generates an error if file does not exist', async () => {
+        expect.assertions(1);
+
+        try {
+            await CASADeregistrationLoader.listAllDeregistrations("randompath.xls");
+        } catch(err) {
+            expect(err).not.toBeNull();
+        }
     });
 });
 
 describe("Loads correct data", () => {
-    it('Handles an empty file', () => {
-        let result:DeregistrationData[] = CASADeregistrationLoader.listAllDeregistrations("tests/register/data/deregistration/empty_data.csv");
+    it('Handles an empty file', async () => {
+        let result:DeregistrationData[] = await CASADeregistrationLoader.listAllDeregistrations("tests/register/data/deregistration/empty_data.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(0);
     });
 
-    it("Handles a single row of correct data", () => {
-        let result:DeregistrationData[] = CASADeregistrationLoader.listAllDeregistrations("tests/register/data/deregistration/single_row_basic_deregistration.csv");
+    it("Handles a single row of correct data", async () => {
+        let result:DeregistrationData[] = await CASADeregistrationLoader.listAllDeregistrations("tests/register/data/deregistration/single_row_basic_deregistration.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -65,8 +77,8 @@ describe("Loads correct data", () => {
         expect(entry.registeredOperator.commencementDate).toBeFalsy();
     });
 
-    it("Handles a multiple deregistrations of the same mark", () => {
-        let result:DeregistrationData[] = CASADeregistrationLoader.listAllDeregistrations("tests/register/data/deregistration/multi_row_same_mark.csv");
+    it("Handles a multiple deregistrations of the same mark", async () => {
+        let result:DeregistrationData[] = await CASADeregistrationLoader.listAllDeregistrations("tests/register/data/deregistration/multi_row_same_mark.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(2);
@@ -88,8 +100,8 @@ describe("Loads correct data", () => {
 });
 
 describe("Handles bad data", () => {
-    it("No addresses provided error", () => {
-        let result:DeregistrationData[] = CASADeregistrationLoader.listAllDeregistrations("tests/register/data/deregistration/single_row_no_addresses.csv");
+    it("No addresses provided error", async () => {
+        let result:DeregistrationData[] = await CASADeregistrationLoader.listAllDeregistrations("tests/register/data/deregistration/single_row_no_addresses.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -119,8 +131,8 @@ describe("Handles bad data", () => {
         expect(entry.registeredOperator.address.country).toBeFalsy();
     });
 
-    it("No state error", () => {
-        let result:DeregistrationData[] = CASADeregistrationLoader.listAllDeregistrations("tests/register/data/deregistration/single_row_uk_address.csv");
+    it("No state error", async () => {
+        let result:DeregistrationData[] = await CASADeregistrationLoader.listAllDeregistrations("tests/register/data/deregistration/single_row_uk_address.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -140,8 +152,8 @@ describe("Handles bad data", () => {
         expect(entry.registeredHolder.address.country).toBe("United Kingdom");
     });
 
-    it("Missing serial number", () => {
-        let result:DeregistrationData[] = CASADeregistrationLoader.listAllDeregistrations("tests/register/data/deregistration/single_row_error.csv");
+    it("Missing serial number", async () => {
+        let result:DeregistrationData[] = await CASADeregistrationLoader.listAllDeregistrations("tests/register/data/deregistration/single_row_error.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(1);
@@ -159,8 +171,8 @@ describe("Handles bad data", () => {
 
 /** Normally skipped so that we don't take forever on the tests and this doesn't add any value */
 describe.skip("Load full file", () => {
-    it("Can load the whole dataset ", () => {
-        let result:DeregistrationData[] = CASADeregistrationLoader.listAllDeregistrations("tests/register/data/deregistration/casa_deregistrations_since_2000.csv");
+    it("Can load the whole dataset ", async () => {
+        let result:DeregistrationData[] = await CASADeregistrationLoader.listAllDeregistrations("tests/register/data/deregistration/casa_deregistrations_since_2000.csv");
 
         expect(result).toBeTruthy();
         expect(result.length).toBe(3502);
