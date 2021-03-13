@@ -12,7 +12,7 @@
     ],
     "module": "esnext",
     "esModuleInterop": true,
-    "outDir": "build/lib",
+    "outDir": "lib",
     "rootDir": "src",
     "strict": true,
     "sourceMap": true,
