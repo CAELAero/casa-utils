@@ -7,7 +7,7 @@
  */
 import { Readable } from 'stream';
 
-import { ParsingOptions, readFile, read, SSF, WorkBook, utils } from 'xlsx';
+import { ParsingOptions, readFile, read, SSF, WorkBook } from 'xlsx';
 
 import { CertificationCategoryType } from './certification-category-type';
 import { EnumMapper } from './enum-mapper';
