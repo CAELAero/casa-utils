@@ -35,6 +35,13 @@ export class SimpleDate {
         return this._year;
     }
 
+    public toISOString(): string {
+        let m = this._month < 10 ? "0" + this._month : this._month;
+        let d = this._day < 10 ? "0" + this._day : this._day;
+
+        return `${this._year}-${m}-${d}`;
+    }
+
     public static parse(raw: string): SimpleDate {
         if (!raw || raw.trim().length === 0) {
             return undefined;
