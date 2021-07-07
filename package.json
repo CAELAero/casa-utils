@@ -52,7 +52,7 @@
     "xlsx": "^0.18"
   },
   "devDependencies": {
-    "@types/jest": "^27.x",
+    "@types/jest": "^26.x",
     "@types/node": "^16.x",
     "@typescript-eslint/eslint-plugin": "^4.28",
     "@typescript-eslint/parser": "^4.28",
