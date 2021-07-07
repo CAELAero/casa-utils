@@ -30,7 +30,8 @@ module.exports = {
     },
     "plugins": [
         "eslint-plugin-prefer-arrow",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "prettier"
     ],
     "rules": {
         "@typescript-eslint/no-inferrable-types": "off",
