@@ -89,7 +89,11 @@ export class CASAHolderOrOperatorChangeLoader {
                 // Should never get here since the above parsing is quite forgiving. Likely this is due
                 // to a stream or other interrupt error.
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                console.error(`Error reading row ${row} due to ${error.message}`, error);
+                if (error instanceof Error) {
+                    console.error(`Error reading row ${row} due to ${error.message}`, error);
+                } else {
+                    console.error(`Unexpected row error object found on row ${row}`, error);
+                }
             }
         });
 
