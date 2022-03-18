@@ -56,7 +56,7 @@ export class CASADeregistrationLoader {
                 entry.model = CASALoaderUtils.parseString(row[2]);
                 entry.serialNumber = CASALoaderUtils.parseString(row[3]);
 
-                entry.effectiveDate = SimpleDate.parse(row[4]);
+                entry.effectiveDate = SimpleDate.parse(row[4] as string);
                 entry.reason = CASALoaderUtils.parseString(row[5]);
 
                 const holder_postcode = row[11] ? String(row[11]).padStart(4, '0') : null;
@@ -69,7 +69,7 @@ export class CASADeregistrationLoader {
                     CASALoaderUtils.parseString(row[12]),
                 );
 
-                entry.registeredHolder = OwnerData.create(row[6], holder_add, null);
+                entry.registeredHolder = OwnerData.create(row[6] as string, holder_add, null);
 
                 const operator_postcode = row[18] ? String(row[18]).padStart(4, '0') : null;
                 const operator_add = Address.create2Line(
@@ -81,7 +81,7 @@ export class CASADeregistrationLoader {
                     CASALoaderUtils.parseString(row[19]),
                 );
 
-                entry.registeredOperator = OwnerData.create(row[13], operator_add, null);
+                entry.registeredOperator = OwnerData.create(row[13] as string, operator_add, null);
 
                 retval.push(entry);
             } catch (error) {

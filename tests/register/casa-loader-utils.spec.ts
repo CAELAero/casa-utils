@@ -9,6 +9,14 @@ import * as fs from 'fs';
 
 import { CASALoaderUtils } from '../../src/register/casa-loader-utils';
 
+describe("String parsing", () => {
+    it("Returns undefined for non-string data", () => {
+        expect(CASALoaderUtils.parseString(1234)).toBe("1234");
+        expect(CASALoaderUtils.parseString(undefined)).toBeUndefined();
+        expect(CASALoaderUtils.parseString("abc")).toBe("abc");
+    });
+});
+
 describe("Async Stream Loading", () => {
     it("Handles a readable as source", async () => {
         // Same test as the single row test, but we're going to load it ourselves as

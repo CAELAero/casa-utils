@@ -21,8 +21,15 @@ import { SimpleDate } from './simple-date';
  * @internal
  */
 export class CASALoaderUtils {
-    static parseString(src: string): string {
-        return src ? src.toString().trim() : undefined;
+    static parseString(src: any): string {
+        const src_type = typeof src;
+
+        if (src_type === 'string' || src_type === 'number') {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+            return src ? src.toString().trim() : undefined;
+        } else {
+            return undefined;
+        }
     }
 
     static parseDate(excelDate: number): SimpleDate {
@@ -88,12 +95,12 @@ export class CASALoaderUtils {
             // ReadableStream is a derived type of Readable, so we're good here
             return CASALoaderUtils.readStream(source, options);
         } else if (source instanceof ReadableStream) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-explicit-any
             const readable = new Readable().wrap(source as any);
             return CASALoaderUtils.readStream(readable, options);
         } else if (source instanceof Blob) {
             const blob_stream = source.stream();
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-explicit-any
             const readable = new Readable().wrap(blob_stream as any);
             return CASALoaderUtils.readStream(readable, options);
         } else {
@@ -107,7 +114,9 @@ export class CASALoaderUtils {
 
         const reader = new Promise<WorkBook>((resolve, reject) => {
             stream.on('data', (data) => {
-                buffers.push(data);
+                if (data instanceof Uint8Array) {
+                    buffers.push(data);
+                }
             });
             stream.on('end', () => resolve(read(Buffer.concat(buffers), options)));
             stream.on('error', reject);

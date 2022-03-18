@@ -56,26 +56,29 @@ export class CASARegistrationLoader {
                 entry.mark = 'VH-' + (row[0] as string);
                 entry.manufacturer = CASALoaderUtils.parseString(row[1]);
                 entry.manufacturerCountry = CASALoaderUtils.parseString(row[37]);
-                entry.manufactureYear = parseInt(row[38], 10) || 0;
+                entry.manufactureYear = parseInt(row[38] as string, 10) || 0;
 
                 entry.model = CASALoaderUtils.parseString(row[3]);
                 entry.serialNumber = CASALoaderUtils.parseString(row[4]);
-                entry.mtow = parseInt(row[5], 10) || 0;
-                entry.engineCount = parseInt(row[6], 10) || 0;
+                entry.mtow = parseInt(row[5] as string, 10) || 0;
+                entry.engineCount = parseInt(row[6] as string, 10) || 0;
 
                 if (entry.engineCount > 0) {
-                    const eng_data = EngineData.create(row[7], row[8], String(row[9]), row[10]);
+                    const eng_type = enum_mapper.lookupEngine(row[8] as string);
+                    const fuel_type = enum_mapper.lookupFuel(row[10] as string);
+
+                    const eng_data = EngineData.create(row[7] as string, eng_type, String(row[9]), fuel_type);
                     entry.engine = eng_data;
                 }
 
-                entry.registrationType = enum_mapper.lookupRegistration(row[11]);
+                entry.registrationType = enum_mapper.lookupRegistration(row[11] as string);
                 entry.registrationSuspended = row[40] === 'Suspended';
 
-                entry.firstRegisteredDate = CASALoaderUtils.parseDate(row[28]);
-                entry.registrationExpiryDate = CASALoaderUtils.parseDate(row[29]);
+                entry.firstRegisteredDate = CASALoaderUtils.parseDate(row[28] as number);
+                entry.registrationExpiryDate = CASALoaderUtils.parseDate(row[29] as number);
 
-                entry.landingGear = enum_mapper.lookupLandingGear(row[29]);
-                entry.airframeType = enum_mapper.lookupAirframe(row[30]);
+                entry.landingGear = enum_mapper.lookupLandingGear(row[29] as string);
+                entry.airframeType = enum_mapper.lookupAirframe(row[30] as string);
 
                 if (row[34] && row[34] !== 'AIRCRAFT NOT FITTED WITH PROPELLER') {
                     entry.propellerManufacturer = String(row[34]).trim();
@@ -99,9 +102,9 @@ export class CASARegistrationLoader {
                     holder_postcode,
                     CASALoaderUtils.parseString(row[18]),
                 );
-                const holder_date = CASALoaderUtils.parseDate(row[19]);
+                const holder_date = CASALoaderUtils.parseDate(row[19] as number);
 
-                entry.registeredHolder = OwnerData.create(row[12], holder_add, holder_date);
+                entry.registeredHolder = OwnerData.create(row[12] as string, holder_add, holder_date);
 
                 const operator_postcode = row[25] ? String(row[25]).padStart(4, '0') : null;
                 const operator_add = Address.create2Line(
@@ -112,12 +115,12 @@ export class CASARegistrationLoader {
                     operator_postcode,
                     CASALoaderUtils.parseString(row[26]),
                 );
-                const operator_date = CASALoaderUtils.parseDate(row[27]);
+                const operator_date = CASALoaderUtils.parseDate(row[27] as number);
 
-                entry.registeredOperator = OwnerData.create(row[20], operator_add, operator_date);
+                entry.registeredOperator = OwnerData.create(row[20] as string, operator_add, operator_date);
 
-                entry.standardCoA = CASALoaderUtils.parseCertCategories(enum_mapper, row[31]);
-                entry.specialCoA = CASALoaderUtils.parseCertCategories(enum_mapper, row[32]);
+                entry.standardCoA = CASALoaderUtils.parseCertCategories(enum_mapper, row[31] as string);
+                entry.specialCoA = CASALoaderUtils.parseCertCategories(enum_mapper, row[32] as string);
 
                 retval.push(entry);
             } catch (error) {

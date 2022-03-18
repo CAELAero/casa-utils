@@ -56,7 +56,7 @@ export class CASAHolderOrOperatorChangeLoader {
                 entry.model = CASALoaderUtils.parseString(row[2]);
                 entry.serialNumber = CASALoaderUtils.parseString(row[3]);
 
-                entry.effectiveDate = SimpleDate.parse(row[4]);
+                entry.effectiveDate = SimpleDate.parse(row[4] as string);
 
                 const holder_postcode = row[10] ? String(row[10]).padStart(4, '0') : null;
                 const holder_add = Address.create2Line(
@@ -67,9 +67,9 @@ export class CASAHolderOrOperatorChangeLoader {
                     holder_postcode,
                     CASALoaderUtils.parseString(row[11]),
                 );
-                const holder_date = SimpleDate.parse(row[20]);
+                const holder_date = SimpleDate.parse(row[20] as string);
 
-                entry.registeredHolder = OwnerData.create(row[5], holder_add, holder_date);
+                entry.registeredHolder = OwnerData.create(row[5] as string, holder_add, holder_date);
 
                 const operator_postcode = row[17] ? String(row[17]).padStart(4, '0') : null;
                 const operator_add = Address.create2Line(
@@ -80,9 +80,9 @@ export class CASAHolderOrOperatorChangeLoader {
                     operator_postcode,
                     CASALoaderUtils.parseString(row[18]),
                 );
-                const operator_date = SimpleDate.parse(row[21]);
+                const operator_date = SimpleDate.parse(row[21] as string);
 
-                entry.registeredOperator = OwnerData.create(row[12], operator_add, operator_date);
+                entry.registeredOperator = OwnerData.create(row[12] as string, operator_add, operator_date);
 
                 retval.push(entry);
             } catch (error) {
