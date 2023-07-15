@@ -18,10 +18,10 @@ module.exports = {
     },
     "extends": [
         "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:@typescript-eslint/recommended-type-checked",
         "plugin:import/errors",
         "plugin:import/warnings",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {

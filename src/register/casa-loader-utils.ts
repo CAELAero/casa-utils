@@ -7,7 +7,8 @@
  */
 import { Readable } from 'stream';
 
-import { ParsingOptions, readFile, read, SSF, WorkBook } from 'xlsx';
+import { ParsingOptions, readFile, read, WorkBook } from 'xlsx';
+import { parse_date_code, SSF$Date } from 'ssf';
 
 import { CertificationCategoryType } from './certification-category-type';
 import { EnumMapper } from './enum-mapper';
@@ -36,7 +37,7 @@ export class CASALoaderUtils {
         let retval = null;
 
         if (excelDate) {
-            const date_data = SSF.parse_date_code(excelDate);
+            const date_data: SSF$Date = parse_date_code(excelDate);
             // Adjust for daylight saving time processing when we are not currently in
             // DST in real time running this code. It will parse the dates as 11pm the
             // day before leaving the dates off by one.
