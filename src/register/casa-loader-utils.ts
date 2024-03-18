@@ -8,7 +8,6 @@
 import { Readable } from 'stream';
 
 import { ParsingOptions, readFile, read, WorkBook } from 'xlsx';
-import { parse_date_code, SSF$Date } from 'ssf';
 
 import { CertificationCategoryType } from './certification-category-type';
 import { EnumMapper } from './enum-mapper';
