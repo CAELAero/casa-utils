@@ -8,6 +8,7 @@
 import * as fs from 'fs';
 
 import { CASALoaderUtils } from '../../src/register/casa-loader-utils';
+import { SimpleDate } from '../../src/register/simple-date';
 
 describe("String parsing", () => {
     it("Returns undefined for non-string data", () => {
@@ -15,6 +16,30 @@ describe("String parsing", () => {
         expect(CASALoaderUtils.parseString(undefined)).toBeUndefined();
         expect(CASALoaderUtils.parseString("abc")).toBe("abc");
     });
+});
+
+describe("Date Parsing", () => {
+    it("Parses correctly formatted dates", () => {
+        const date_obj: SimpleDate = CASALoaderUtils.parseDate('2000-10-13');
+
+        expect(date_obj.year).toBe(2000);
+        expect(date_obj.month).toBe(10);
+        expect(date_obj.day).toBe(13);
+    }),
+    it("Parses values <10 correctly", () => {
+        const date_obj: SimpleDate = CASALoaderUtils.parseDate('2000-03-08');
+
+        expect(date_obj.year).toBe(2000);
+        expect(date_obj.month).toBe(3);
+        expect(date_obj.day).toBe(8);
+    }),
+    it("Handles missing zeroes", () => {
+        const date_obj: SimpleDate = CASALoaderUtils.parseDate('2000-3-8');
+
+        expect(date_obj.year).toBe(2000);
+        expect(date_obj.month).toBe(3);
+        expect(date_obj.day).toBe(8);
+    })
 });
 
 describe("Async Stream Loading", () => {

@@ -33,11 +33,13 @@ export class CASALoaderUtils {
         }
     }
 
-    static parseDate(excelDate: number): SimpleDate {
+    static parseDate(isoDate: string): SimpleDate {
         let retval = null;
 
-        if (excelDate) {
-            const date_data: SSF$Date = parse_date_code(excelDate);
+        if (isoDate) {
+            const js_date: Date = new Date(isoDate);
+
+            // const date_data: string[] = isoDate.split('-');
             // Adjust for daylight saving time processing when we are not currently in
             // DST in real time running this code. It will parse the dates as 11pm the
             // day before leaving the dates off by one.
@@ -45,9 +47,9 @@ export class CASALoaderUtils {
             // TODO: This will still have an error when it is on the month boundary
             //  - it will have the previous month and one too many days for that month.
             // Need a better solution here.
-            const dom = date_data.H === 23 ? date_data.d + 1 : date_data.d;
 
-            retval = new SimpleDate(dom, date_data.m, date_data.y);
+            // retval = new SimpleDate(parseInt(date_data[2], 10), parseInt(date_data[1], 10), parseInt(date_data[0], 10));
+            retval = new SimpleDate(js_date.getDate(), js_date.getMonth() + 1, js_date.getFullYear());
         }
 
         return retval;

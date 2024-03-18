@@ -44,6 +44,9 @@ export class CASARegistrationLoader {
             header: 1,
             blankrows: false,
             range: 1,
+            UTC: true,
+            dateNF: 'yyyy-mm-dd',
+            raw: false,
         });
 
         const retval: RegistrationData[] = [];
@@ -74,8 +77,8 @@ export class CASARegistrationLoader {
                 entry.registrationType = enum_mapper.lookupRegistration(row[11] as string);
                 entry.registrationSuspended = row[40] === 'Suspended';
 
-                entry.firstRegisteredDate = CASALoaderUtils.parseDate(row[28] as number);
-                entry.registrationExpiryDate = CASALoaderUtils.parseDate(row[29] as number);
+                entry.firstRegisteredDate = CASALoaderUtils.parseDate(row[28] as string);
+                entry.registrationExpiryDate = CASALoaderUtils.parseDate(row[29] as string);
 
                 entry.landingGear = enum_mapper.lookupLandingGear(row[29] as string);
                 entry.airframeType = enum_mapper.lookupAirframe(row[30] as string);
@@ -102,7 +105,7 @@ export class CASARegistrationLoader {
                     holder_postcode,
                     CASALoaderUtils.parseString(row[18]),
                 );
-                const holder_date = CASALoaderUtils.parseDate(row[19] as number);
+                const holder_date = CASALoaderUtils.parseDate(row[19] as string);
 
                 entry.registeredHolder = OwnerData.create(row[12] as string, holder_add, holder_date);
 
@@ -115,7 +118,7 @@ export class CASARegistrationLoader {
                     operator_postcode,
                     CASALoaderUtils.parseString(row[26]),
                 );
-                const operator_date = CASALoaderUtils.parseDate(row[27] as number);
+                const operator_date = CASALoaderUtils.parseDate(row[27] as string);
 
                 entry.registeredOperator = OwnerData.create(row[20] as string, operator_add, operator_date);
 
