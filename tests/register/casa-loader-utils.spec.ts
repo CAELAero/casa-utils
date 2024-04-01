@@ -18,7 +18,7 @@ describe("String parsing", () => {
     });
 });
 
-describe("Date Parsing", () => {
+describe("ISO Date Parsing", () => {
     it("Parses correctly formatted dates", () => {
         const date_obj: SimpleDate = CASALoaderUtils.parseDate('2000-10-13');
 
@@ -35,6 +35,61 @@ describe("Date Parsing", () => {
     }),
     it("Handles missing zeroes", () => {
         const date_obj: SimpleDate = CASALoaderUtils.parseDate('2000-3-8');
+
+        expect(date_obj.year).toBe(2000);
+        expect(date_obj.month).toBe(3);
+        expect(date_obj.day).toBe(8);
+    })
+});
+
+describe("Long Date Parsing", () => {
+    it("Parses correctly formatted dates", () => {
+        const date_obj: SimpleDate = CASALoaderUtils.parseDate('13 October 2000');
+
+        expect(date_obj.year).toBe(2000);
+        expect(date_obj.month).toBe(10);
+        expect(date_obj.day).toBe(13);
+    }),
+    it("Parses values <10 correctly", () => {
+        const date_obj: SimpleDate = CASALoaderUtils.parseDate('08 March 2000');
+
+        expect(date_obj.year).toBe(2000);
+        expect(date_obj.month).toBe(3);
+        expect(date_obj.day).toBe(8);
+    }),
+    it("Handles missing zeroes", () => {
+        const date_obj: SimpleDate = CASALoaderUtils.parseDate('8 March 2000');
+
+        expect(date_obj.year).toBe(2000);
+        expect(date_obj.month).toBe(3);
+        expect(date_obj.day).toBe(8);
+    }),
+    it("Handles short form month", () => {
+        const date_obj: SimpleDate = CASALoaderUtils.parseDate('8 Mar 2000');
+
+        expect(date_obj.year).toBe(2000);
+        expect(date_obj.month).toBe(3);
+        expect(date_obj.day).toBe(8);
+    })
+});
+
+describe("International Slash Date Parsing", () => {
+    it("Parses correctly formatted dates", () => {
+        const date_obj: SimpleDate = CASALoaderUtils.parseDate('13/10/2000');
+
+        expect(date_obj.year).toBe(2000);
+        expect(date_obj.month).toBe(10);
+        expect(date_obj.day).toBe(13);
+    }),
+    it("Parses values <10 correctly", () => {
+        const date_obj: SimpleDate = CASALoaderUtils.parseDate('08/03/2000');
+
+        expect(date_obj.year).toBe(2000);
+        expect(date_obj.month).toBe(3);
+        expect(date_obj.day).toBe(8);
+    }),
+    it("Handles missing zeroes", () => {
+        const date_obj: SimpleDate = CASALoaderUtils.parseDate('8/3/2000');
 
         expect(date_obj.year).toBe(2000);
         expect(date_obj.month).toBe(3);
