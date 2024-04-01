@@ -37,8 +37,8 @@ export class CASALoaderUtils {
 
         if (isoDate) {
             // special case handling for non-US dates where things are done properly - day/month/year. Anything
-            // else is parsed correctly by the stock Date object. I could use a real date parsing library 
-            // here, but keeping things to a minimum for dependencies and it is the only proper case that 
+            // else is parsed correctly by the stock Date object. I could use a real date parsing library
+            // here, but keeping things to a minimum for dependencies and it is the only proper case that
             // needs to be dealt with outside, so do this inline.
             if (isoDate.indexOf('/') !== -1) {
                 const parts = isoDate.split('/');
@@ -51,7 +51,7 @@ export class CASALoaderUtils {
             } else {
                 const js_date: Date = new Date(isoDate);
 
-                retval = new SimpleDate(js_date.getDate(), js_date.getMonth() + 1, js_date.getFullYear());    
+                retval = new SimpleDate(js_date.getDate(), js_date.getMonth() + 1, js_date.getFullYear());
             }
         }
 
