@@ -16,7 +16,7 @@
     "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:import/errors",
     "plugin:import/warnings",
-    "prettier"
+    "plugin:prettier/recommended"
   ],
   "rules": {
     "import/no-unresolved": "off",
