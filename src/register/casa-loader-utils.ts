@@ -21,6 +21,7 @@ import { SimpleDate } from './simple-date';
  * @internal
  */
 export class CASALoaderUtils {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     static parseString(src: any): string {
         const src_type = typeof src;
 

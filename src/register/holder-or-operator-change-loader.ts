@@ -7,7 +7,7 @@
  */
 import { Readable } from 'stream';
 
-import { WorkBook, utils } from 'xlsx';
+import { Sheet2JSONOpts, WorkBook, utils } from 'xlsx';
 
 import { Address } from './address';
 import { CASALoaderUtils } from './casa-loader-utils';
@@ -39,11 +39,16 @@ export class CASAHolderOrOperatorChangeLoader {
         const loaded_data = workbook.Sheets[workbook.SheetNames[0]];
 
         // Could we find the data? undefined or null here if not. Throw error
-        const sheet_data: any[][] = utils.sheet_to_json(loaded_data, {
+        const conv_opts: Sheet2JSONOpts = {
             header: 1,
             blankrows: false,
             range: 1,
-        });
+            UTC: true,
+            dateNF: 'yyyy-mm-dd',
+            raw: false,
+        };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const sheet_data: any[][] = utils.sheet_to_json(loaded_data, conv_opts);
 
         const retval: HolderOrOperatorChangeData[] = [];
 
@@ -89,10 +94,11 @@ export class CASAHolderOrOperatorChangeLoader {
                 // Should never get here since the above parsing is quite forgiving. Likely this is due
                 // to a stream or other interrupt error.
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                const row_str = '[ ' + row.join(',') + ' ]';
                 if (error instanceof Error) {
-                    console.error(`Error reading row ${row} due to ${error.message}`, error);
+                    console.error(`Error reading row ${row_str} due to ${error.message}`, error);
                 } else {
-                    console.error(`Unexpected row error object found on row ${row}`, error);
+                    console.error(`Unexpected row error object found on row ${row_str}`, error);
                 }
             }
         });
