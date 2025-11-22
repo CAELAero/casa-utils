@@ -38,7 +38,7 @@
   "scripts": {
     "build": "tsc --build",
     "test": "jest --config jest.config.json",
-    "coverage": "jest --coverage  && cat ./coverage/lcov.info | coveralls",
+    "coverage": "jest --coverage",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "./node_modules/.bin/eslint src",
     "docs": "typedoc src",
@@ -58,7 +58,6 @@
     "@typescript-eslint/eslint-plugin": "^7.x",
     "@typescript-eslint/parser": "^7.x",
     "acorn": "^8.x",
-    "coveralls": "^3.1",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^9.x",
     "eslint-plugin-import": "^2.25",
